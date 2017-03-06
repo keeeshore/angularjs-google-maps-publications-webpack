@@ -2,8 +2,15 @@
  * Created by balank on 1/03/2017.
  */
 var path = require('path');
+var webpack = require('webpack');
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var extractCSS =  new ExtractTextPlugin('styles.css');
+var uglifyJs = new webpack.optimize.UglifyJsPlugin({
+    compress: {
+        warnings: false,
+        drop_console: false
+    }
+});
 
 module.exports = {
 
@@ -31,7 +38,5 @@ module.exports = {
             }
         ]
     },
-    plugins: [
-        extractCSS
-    ]
+    plugins: [ extractCSS/*, uglifyJs */]
 };
