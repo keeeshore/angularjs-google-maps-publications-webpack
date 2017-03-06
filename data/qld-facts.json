@@ -1,0 +1,100 @@
+[
+  {
+    "id": "Albert & Logan News",
+    "facts": {
+      "Readership": "73,000",
+      "Circulation": "70,970"
+    }
+  },
+  {
+    "id": "Brisbane News",
+    "facts": {
+      "Readership": "103,000",
+      "Circulation": "104,683"
+    }
+  },
+  {
+    "id": "Caboolture Herald",
+    "facts": {
+      "Readership": "37,000",
+      "Circulation": "34,151"
+    }
+  },
+  {
+    "id": "City North News",
+    "facts": {
+      "Readership": "14,000",
+      "Circulation": "21,740"
+    }
+  },
+  {
+    "id": "City South News",
+    "facts": {
+      "Readership": "13,000",
+      "Circulation": "18,725"
+    }
+  },
+  {
+    "id": "Northside Chronicle",
+    "facts": {
+      "Readership": "44,000",
+      "Circulation": "54,323"
+    }
+  },
+  {
+    "id": "North-West News",
+    "facts": {
+      "Readership": "67,000",
+      "Circulation": "38,763"
+    }
+  },
+  {
+    "id": "Pine Rivers Press/North Lakes Times",
+    "facts": {
+      "Readership": "47,000",
+      "Circulation": "37,575"
+    }
+  },
+  {
+    "id": "Redcliffe &amp; Bayside Herald",
+    "facts": {
+      "Readership": "45,000",
+      "Circulation": "32,246"
+    }
+  },
+  {
+    "id": "South-East Advertiser",
+    "facts": {
+      "Readership": "45,000",
+      "Circulation": "43,877"
+    }
+  },
+  {
+    "id": "Southern Star",
+    "facts": {
+      "Readership": "45,000",
+      "Circulation": "53,288"
+    }
+  },
+  {
+    "id": "South-West News/Springfield News",
+    "facts": {
+      "Readership": "51,000",
+      "Circulation": "55,434"
+    }
+  },
+  {
+    "id": "Westside News",
+    "facts": {
+      "Readership": "33,000",
+      "Circulation": "45,155"
+    }
+  },
+  {
+    "id": "Wynnum Herald",
+    "facts": {
+      "Readership": "41,000",
+      "Circulation": "31,563"
+    }
+  }
+]

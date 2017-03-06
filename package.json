@@ -1,0 +1,33 @@
+{
+  "name": "angularjs-webpack-tests",
+  "version": "1.0.0",
+  "description": "AngularJS with news publications and map",
+  "scripts": {
+    "build": "",
+	"test": "karma start",
+    "start": "webpack && http-server",
+	"build": "npm run test && npm run start"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "angular-mocks": "^1.6.2",
+    "babel-core": "^6.23.1",
+    "babel-loader": "^6.3.2",
+    "babel-preset-es2015": "^6.22.0",
+    "css-loader": "^0.26.2",
+    "extract-text-webpack-plugin": "^2.0.0",
+    "http-server": "^0.9.0",
+    "jasmine-core": "^2.5.2",
+    "karma": "^1.5.0",
+    "karma-chrome-launcher": "^2.0.0",
+    "karma-jasmine": "^1.1.0",
+    "karma-typescript": "^2.1.7",
+    "karma-webpack": "^2.0.2",
+    "style-loader": "^0.13.2",
+    "typescript": "^2.2.1",
+    "webpack": "^2.2.1"
+  },
+  "dependencies": {
+    "angular": "^1.6.2"
+  }
+}

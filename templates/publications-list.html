@@ -1,0 +1,18 @@
+<div class="publications-data">
+    <div class="form-control">
+        <input id="pac-input" class="pac-input" type="text" placeholder="Enter suburb to find publication">
+    </div>
+    <div class="form-output" ng-if="activePub">
+        <span class="selected-pub">{{activePub}}</span>
+        <ul class="facts" ng-if="activePubFacts">
+            <li ng-repeat="(key, value) in activePubFacts.facts">
+                {{key}}:  {{value}}
+            </li>
+        </ul>
+    </div>
+    <ul class="pub-list">
+        <li ng-repeat="publication in publications track by $index" class="{{activePub === publication.id ? 'active': 'none'}}">
+            <a ng-click="onClickPublicationLink(publication)" href="">{{publication.id}}</a>
+        </li>
+    </ul>
+</div>
