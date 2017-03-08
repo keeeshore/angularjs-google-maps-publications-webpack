@@ -104,29 +104,18 @@ describe('MapApp', function() {
         NSW: {
             state: 'NSW',
             geoJson: 'data/nsw.json',
-            center: { lat: -33.8899191578029, lng: 151.20217386753,  },
+            center: { lat: -33.8899191578029, lng: 151.20217386753  },
             styles: styles
         },
         QLD: {
             state: 'QLD',
             geoJson: 'data/qld.json',
-            center: { lat: -27.470125, lng: 153.021072 },styles: styles },
+            center: { lat: -27.470125, lng: 153.021072 },
             styles: styles
+        }
     };
 
     beforeEach(module('mapApp'));
-
-    /*beforeEach(module(function($locationProvider) {
-        $locationProvider.html5Mode(true);
-        $locationProvider.hashPrefix('!');
-    }));*/
-
-    /*it('has a dummy spec to test 2 + 2', function() {
-        // An intentionally failing test. No code within expect() will never equal 4.
-        expect(1 + 1).toEqual(4);
-        //passing test
-        expect(2 + 2).toEqual(4);
-    });*/
 
     var $controller,
         $scope,
@@ -249,11 +238,12 @@ describe('MapService', function() {
                 fn: function () {
                     return true;
                 }
-            };
+            },
+            isSearchInput = true;
         spyOn(obj, 'fn');
         mapService.onSelectMapPublication(obj.fn);
-        mapService.selectMapPublication(pubs);
-        expect(obj.fn).toHaveBeenCalledWith(pubs);
+        mapService.selectMapPublication(pubs, isSearchInput);
+        expect(obj.fn).toHaveBeenCalledWith(pubs, isSearchInput);
     });
 
     it('should invoke onSelectMapFeature callback when selectMapFeature is triggered', function () {

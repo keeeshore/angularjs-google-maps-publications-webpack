@@ -3,7 +3,7 @@
         <input id="pac-input" class="pac-input" type="text" placeholder="Enter suburb to find publication">
     </div>
     <div class="form-output">
-        <div class="content" ng-if="searchedPlace">
+        <div class="search-place content" ng-if="searchedPlace">
             The publications available in {{searchedPlace.vicinity}}
         </div>
         <div ng-repeat="publication in publications" ng-if="publication.isSelected">
@@ -21,6 +21,7 @@
             </ul>
         </div>
     </div>
+
     <ul class="pub-list" style="display:none;">
         <li ng-repeat="publication in publications track by $index" class="{{publication.isSelected ? 'active': 'none'}}">
             <a ng-click="onClickPublicationLink(publication)" href="">{{publication.id}}</a>
