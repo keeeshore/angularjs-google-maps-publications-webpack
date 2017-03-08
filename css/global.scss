@@ -64,7 +64,7 @@ body {
 header {
 
   .container {
-    width: 70%;
+    width: 80%;
     margin: 0px auto;
   }
 
@@ -76,14 +76,28 @@ header {
   .menu-container {
     background: #d8d8d8;
     font-size: 18px;
-    padding: 14px 0px;
+    padding: 8px 0px;
 
     .insights {
       width: 45%;
       display: inline-block;
+      strong {
+        text-decoration: underline;
+      }
     }
     .state-insight {
       text-align: right;
+    }
+
+    .state-btn {
+      display: inline-block;
+      padding: 5px 13px;
+      border-radius: 30px;
+      background: #FFF;
+      margin: 0px 0px 0px 5px;
+      color: #000;
+      text-decoration: none;
+      border: 1px solid #18d4ca;
     }
 
   }

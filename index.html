@@ -24,9 +24,10 @@
                 <div class="menu-container">
                     <div class="container">
                         <div class="current-insight insights">
-                            Showing insights for <span>{{activeMapConfig.insights}}</span></div>
-                        <div class="state-insight insights">For state insights on the ?, select
-                            <a href="#!?state=qld&publication=DT">State/Metro</a>
+                            Showing insights for <strong>{{activeMapConfig.insights}}</strong>
+                        </div>
+                        <div class="state-insight insights">For state insights on the <strong>{{activeMapConfig.statePublication}}</strong>, select
+                            <a class="state-btn" href="#!?state={{activeMapConfig.state}}&publication={{activeMapConfig.statePublication}}">State/Metro</a>
                         </div>
                     </div>
                 </div>

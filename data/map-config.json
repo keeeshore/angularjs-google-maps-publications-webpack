@@ -4,6 +4,7 @@
 	"geoJson": "data/nsw.json",
 	"insights": "Sydney Local Community Newspaper",
 	"center": { "lat": -33.8899191578029, "lng": 151.20217386753  },
+	"statePublication": "The Daily Telegraph",
 	"publicationsMapping": [
 	  {
 		"id": "Penrith Press",
@@ -24,20 +25,20 @@
 	"geoJson": "data/qld.json",
 	"insights": "Brisbane Local Community Newspaper",
 	"center": { "lat": -27.470125, "lng": 153.021072 },
-	"styles": []
+	"statePublication": "The Courier Mail"
   },
   "SA": {
 	"state": "SA",
 	"geoJson": "",
 	"insights": "",
 	"center": { "lat": 0, "lng": 0 },
-	"styles": []
+	"statePublication": "The Advertiser"
   },
   "VIC": {
 	"state": "VIC",
 	"geoJson": "",
 	"insights": "",
 	"center": { "lat": 0, "lng": 0 },
-	"styles": []
+	"statePublication": "The Herald Sun"
   }
 }
