@@ -1,5 +1,6 @@
 # angularjs-google-maps-publications
 AngularJs with google maps and news publication selection list based on selected area in map.
+Demo URL: https://keeeshore.github.io/angularjs-google-maps-publications-webpack/
 
 # Pre requisites
 1. NodeJs must be installed.
