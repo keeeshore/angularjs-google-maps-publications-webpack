@@ -3,7 +3,7 @@
         <input id="pac-input" class="pac-input" type="text" placeholder="Enter suburb to find publication">
     </div>
     <div class="form-output">
-        <div class="content">
+        <div class="content" ng-if="searchedPlace">
             The publications available in {{searchedPlace.vicinity}}
         </div>
         <div ng-repeat="publication in publications" ng-if="publication.isSelected">

@@ -180,9 +180,9 @@ mapApp.factory('mapService', ['$timeout', function ($timeout) {
             pubCallbacks.push(cb);
         },
 
-        selectMapPublication: function (publication) {
+        selectMapPublication: function (featureId, isSearchInput) {
             selectPubCallbacks.forEach(function(cb) {
-                cb(publication);
+                cb(featureId, isSearchInput);
             }.bind(this));
         },
 
@@ -265,7 +265,7 @@ mapApp.directive('mapArea', ['mapService', function (mapService) {
                 map.data.addListener('click', function(event) {
                     map.data.revertStyle();
                     controller.selectMapFeature(event.feature);
-                    mapService.selectMapPublication(event.feature.getId());
+                    mapService.selectMapPublication(event.feature.getId(), false);
                 });
 
             }.bind(this));
@@ -331,7 +331,8 @@ mapApp.directive('mapArea', ['mapService', function (mapService) {
 
                 setMapSearchLocation: function (place) {
                     var selectedFeatures = [],
-                        featureIds = [];
+                        featureIds = [],
+                        isSearchInput = true;
                     var bounds = new google.maps.LatLngBounds();
                     var i = {
                         url: place.icon,
@@ -370,12 +371,12 @@ mapApp.directive('mapArea', ['mapService', function (mapService) {
                         map.data.revertStyle();
                         angular.forEach(selectedFeatures, function (feature) {
                             this.selectMapFeature(feature);
-                            mapService.selectMapPublication(featureIds);
+                            mapService.selectMapPublication(featureIds, isSearchInput);
                         }.bind(this));
 
                     } else {
                         map.data.revertStyle();
-                        mapService.selectMapPublication('');
+                        mapService.selectMapPublication('', isSearchInput);
                     }
                 }
 
@@ -429,7 +430,10 @@ mapApp.directive('publicationsList', ['mapService', '$location', function (mapSe
                 });
             }.bind(this));
 
-            mapService.onSelectMapPublication(function (featureId) {
+            mapService.onSelectMapPublication(function (featureId, isSearchInput) {
+                if (!isSearchInput) {
+                    $scope.searchedPlace = null;
+                }
                 controller.selectPublication(featureId, true);
             });
         },
