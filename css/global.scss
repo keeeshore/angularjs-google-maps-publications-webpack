@@ -53,7 +53,7 @@ body {
   font-family: 'Noto Sans', 'PT Sans', 'Open Sans', 'Helvetica Neue', Arial, Helvetica, sans-serif;
   margin: 0px;
   padding: 0px;
-  background: url('../images/mosaic.png') repeat;
+  background: url('/images/mosaic.png') repeat;
 }
 
 .page-container {
@@ -156,7 +156,7 @@ header {
   }
 
   .form-output {
-    padding: 20px 0px;
+    padding: 3px 0px;
     font-size: 18px;
     border-bottom: 1px solid #dddddd;
     background: #424345;
