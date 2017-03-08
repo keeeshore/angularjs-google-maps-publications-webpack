@@ -399,7 +399,7 @@ mapApp.directive('publicationsList', ['mapService', '$location', function (mapSe
                     console.log('featureIds::', featureIds);
                     angular.forEach($scope.publications, function (pubObj) {
                         pubObj.isSelected = featureIds.indexOf(pubObj.id) !== -1 ? true : false;
-                        pubObj.facts = this.getPublicationFact(pubObj.id)
+                        pubObj.facts = this.getPublicationFact(pubObj.id);
                     }.bind(this));
 
                     if (apply) {
