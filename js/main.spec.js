@@ -2,118 +2,18 @@
  * Created by balank on 1/03/2017.
  */
 // Be descriptive with titles here. The describe and it titles combined read like a sentence.
+var styles = require('../data/map-styles.json');
+var mapsConfig = require('../data/map-config.json');
+console.log('mapsConfig=', mapsConfig);
+mapsConfig.NSW.styles = styles;
+mapsConfig.QLD.styles = styles;
+mapsConfig.VIC.styles = styles;
+mapsConfig.SA.styles = styles;
 
 describe('MapApp', function() {
 
     var module = angular.mock.module;
 
-    var styles = [
-        {
-            "featureType": "administrative",
-            "elementType": "labels.text.fill",
-            "stylers": [
-                {
-                    "color": "#444444"
-                }
-            ]
-        },
-        {
-            "featureType": "landscape",
-            "elementType": "all",
-            "stylers": [
-                {
-                    "color": "#dcdcdc"
-                },
-                {
-                    "lightness": 20
-                }
-            ]
-        },
-        {
-            "featureType": "poi",
-            "elementType": "all",
-            "stylers": [
-                {
-                    "visibility": "off"
-                }
-            ]
-        },
-        {
-            "featureType": "poi.business",
-            "elementType": "all",
-            "stylers": [
-                {
-                    "visibility": "off"
-                }
-            ]
-        },
-        {
-            "featureType": "road",
-            "elementType": "all",
-            "stylers": [
-                {
-                    "saturation": -100
-                },
-                {
-                    "lightness": 45
-                }
-            ]
-        },
-        {
-            "featureType": "road.highway",
-            "elementType": "all",
-            "stylers": [
-                {
-                    "visibility": "simplified"
-                }
-            ]
-        },
-        {
-            "featureType": "road.arterial",
-            "elementType": "labels.icon",
-            "stylers": [
-                {
-                    "visibility": "off"
-                }
-            ]
-        },
-        {
-            "featureType": "transit",
-            "elementType": "all",
-            "stylers": [
-                {
-                    "visibility": "off"
-                }
-            ]
-        },
-        {
-            "featureType": "water",
-            "elementType": "all",
-            "stylers": [
-                {
-                    "color": "#B4E4F9"
-                },
-                {
-                    "visibility": "on"
-                }
-            ]
-        }
-    ];
-
-    var mapsConfig = {
-        NSW: {
-            state: 'NSW',
-            geoJson: 'data/nsw.json',
-            center: { lat: -33.8899191578029, lng: 151.20217386753  },
-            styles: styles
-        },
-        QLD: {
-            state: 'QLD',
-            geoJson: 'data/qld.json',
-            center: { lat: -27.470125, lng: 153.021072 },
-            styles: styles
-        }
-    };
 
     beforeEach(module('mapApp'));
 

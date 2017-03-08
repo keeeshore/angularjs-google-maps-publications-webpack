@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "AngularJS with news publications and map",
   "scripts": {
-    "build": "npm run test && npm run start",
+    "build": "npm run test && webpack",
     "test": "karma start",
     "start": "webpack && http-server"
   },

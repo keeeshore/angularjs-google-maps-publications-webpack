@@ -165,10 +165,11 @@ mapApp.directive('mapArea', ['mapService', function (mapService) {
 
                 map.data.addListener('click', function(event) {
                     var clearSearchInput = true;
+                    var featureId = event.feature.getId();
                     map.data.revertStyle();
                     controller.selectMapFeature(event.feature);
-                    mapService.selectMapPublication(event.feature.getId(), clearSearchInput);
-                    controller.selectClosestMapFeatures(event.feature.getId());
+                    controller.selectClosestMapFeatures(featureId);
+                    mapService.selectMapPublication(featureId, clearSearchInput);
                 });
 
             }.bind(this));
