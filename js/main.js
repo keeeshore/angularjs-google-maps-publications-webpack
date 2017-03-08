@@ -1,8 +1,9 @@
+
 /**
  * Created by balank on 23/02/2017.
  */
 var angular = require('angular');
-var css = require('../css/global.css');
+var css = require('../css/global.scss');
 
 var styles = [
     {
@@ -103,7 +104,12 @@ var mapsConfig = {
         center: { lat: -33.8899191578029, lng: 151.20217386753,  },
         styles: styles
     },
-    QLD: {state: 'QLD', geoJson: 'data/qld.json', center: { lat: -27.470125, lng: 153.021072 },styles: styles }
+    QLD: {
+        state: 'QLD',
+        geoJson: 'data/qld.json',
+        center: { lat: -27.470125, lng: 153.021072 },
+        styles: styles
+    }
 };
 
 
@@ -125,7 +131,6 @@ mapApp.controller('MapController', ['$rootScope', '$scope', '$timeout', '$locati
             $scope.activeMapConfig = mapsConfig.NSW;
         }
     });
-
 
 }]);
 
@@ -262,6 +267,7 @@ mapApp.directive('mapArea', ['mapService', function (mapService) {
                 controller.loadGeoJson(map, options.geoJson);
 
                 map.data.addListener('click', function(event) {
+                    map.data.revertStyle();
                     controller.selectMapFeature(event.feature);
                     mapService.selectMapPublication(event.feature.getId());
                 });
@@ -269,6 +275,7 @@ mapApp.directive('mapArea', ['mapService', function (mapService) {
             }.bind(this));
 
             mapService.onSelectMapFeature(function (feature) {
+                map.data.revertStyle();
                 var selectedFeature =  map.data.getFeatureById(feature.id);
                 controller.selectMapFeature(selectedFeature, 'panTo');
             });
@@ -318,7 +325,6 @@ mapApp.directive('mapArea', ['mapService', function (mapService) {
                 },
 
                 selectMapFeature: function (feature, panTo) {
-                    map.data.revertStyle();
                     map.data.overrideStyle(feature, { zIndex:99, strokeColor: 'red', strokeWeight: 1 });
                     if (panTo) {
                         var lng = feature.getProperty('centroid')[0];
@@ -328,7 +334,8 @@ mapApp.directive('mapArea', ['mapService', function (mapService) {
                 },
 
                 setMapSearchLocation: function (place) {
-                    var selectFeature;
+                    var selectedFeatures = [],
+                        featureIds = [];
                     var bounds = new google.maps.LatLngBounds();
                     var i = {
                         url: place.icon,
@@ -347,17 +354,29 @@ mapApp.directive('mapArea', ['mapService', function (mapService) {
                     map.panTo(bounds.getCenter());
 
                     map.data.forEach(function(feature) {
-                        var points = [], shape;
-                        feature.getGeometry().forEachLatLng(function(l) { points.push(l); });
+                        var points = [],
+                            shape;
+
+                        feature.getGeometry().forEachLatLng(function(latLng) {
+                            points.push(latLng);
+                        }.bind(this));
+
                         shape = new google.maps.Polygon({ paths: points });
                         if(google.maps.geometry.poly.containsLocation(place.geometry.location, shape)) {
-                            selectFeature = feature;
+                            selectedFeatures.push(feature);
+                            featureIds.push(feature.getId());
                         }
                     }.bind(this));
 
-                    if (selectFeature) {
-                        this.selectMapFeature(selectFeature);
-                        mapService.selectMapPublication(selectFeature.getId());
+                    console.log('contains [', selectedFeatures.length, ']location ----');
+
+                    if (selectedFeatures.length > 0) {
+                        map.data.revertStyle();
+                        angular.forEach(selectedFeatures, function (feature) {
+                            this.selectMapFeature(feature);
+                            mapService.selectMapPublication(featureIds);
+                        }.bind(this));
+
                     } else {
                         map.data.revertStyle();
                         mapService.selectMapPublication('');
@@ -389,13 +408,9 @@ mapApp.directive('publicationsList', ['mapService', '$location', function (mapSe
             var searchOpts = { componentRestrictions: { country: 'au' }, types: ['geocode'] };
             var search;
 
-            $scope.activePub = '';
-
             $scope.activePlace = null;
 
             $scope.pubFacts = [];
-
-            $scope.activePubFacts= [];
 
             mapService.onLoadMap(function (options) {
                 if (!this.isInit) {
@@ -406,21 +421,22 @@ mapApp.directive('publicationsList', ['mapService', '$location', function (mapSe
             });
 
             $scope.onClickPublicationLink = function (publication) {
-                $scope.activePub = publication.id;
+                controller.selectPublication([publication.id], false);
                 mapService.selectMapFeature(publication);
             };
 
             mapService.onLoadPublications(function (publications) {
-                controller.getAllPublicationFacts();
-                controller.addPublications(publications);
+                controller.getAllPublicationFacts().then(function () {
+                    controller.addPublications(publications);
+                });
             }.bind(this));
 
             mapService.onSelectMapPublication(function (featureId) {
-                controller.selectPublication(featureId);
+                controller.selectPublication(featureId, true);
             });
         },
 
-        controller: ['$scope', '$timeout', '$http', function ($scope, $timeout, $http) {
+        controller: ['$scope', '$timeout', '$http', '$q', function ($scope, $timeout, $http, $q) {
 
             return {
 
@@ -447,7 +463,9 @@ mapApp.directive('publicationsList', ['mapService', '$location', function (mapSe
                     $scope.publications = data.features.map(function(feature){
                         return {
                             id: feature.id,
-                            properties: feature.properties
+                            properties: feature.properties,
+                            isSelected: false,
+                            facts: []
                         }
                     });
                     if ($scope.activePlace) {
@@ -458,29 +476,39 @@ mapApp.directive('publicationsList', ['mapService', '$location', function (mapSe
                     }
 
                 },
-                selectPublication: function (featureId) {
-                    $scope.activePub = featureId;
-                    $scope.$apply();
-                    this.setPublicationFact(featureId);
+
+                selectPublication: function (featureIds, apply) {
+                    console.log('featureIds::', featureIds);
+                    angular.forEach($scope.publications, function (pubObj) {
+                        pubObj.isSelected = featureIds.indexOf(pubObj.id) !== -1 ? true : false;
+                        pubObj.facts = this.getPublicationFact(pubObj.id)
+                    }.bind(this));
+                    if (apply) {
+                        $scope.$apply();
+                    }
                 },
 
                 getAllPublicationFacts: function () {
                     var state = $scope.activeMapConfig.state;
                     var factUrl = 'data/' + state.toLowerCase() + '-facts.json';
-                    $http.get(factUrl).then(function (response) {
-                        $scope.pubFacts = response.data;
+                    return $q(function(resolve, reject) {
+                        $http.get(factUrl).then(function (response) {
+                            $scope.pubFacts = response.data;
+                            resolve();
+                        }, function (err) {
+                            console.log('[ERROR] No data loaded: ', err);
+                            reject(err);
+                        });
                     });
                 },
 
-                setPublicationFact: function (featureId) {
-                    if ($scope.activePubFacts && $scope.activePubFacts.id !== featureId) {
-                        $scope.activePubFacts = null;
-                    }
-                    angular.forEach($scope.pubFacts, function (factObj) {
-                        if (factObj.id === featureId) {
-                            $scope.activePubFacts = factObj;
-                        }
+                getPublicationFact: function (featureId) {
+                    var facts = $scope.pubFacts.filter(function (factObj) {
+                        return factObj.id === featureId;
+                    }).map(function (filteredObj) {
+                        return filteredObj.facts
                     });
+                    return facts[0] || {}
                 }
 
             };
@@ -488,7 +516,5 @@ mapApp.directive('publicationsList', ['mapService', '$location', function (mapSe
         }]
 
     }
+
 }]);
-
-
-

@@ -9,22 +9,37 @@
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCfHPB2CpWVLUSWWrIxWE2BBKE5OAWiyw4&libraries=places&components=country:au">
     </script>
     <script src="dist/bundle.js"></script>
-    <link rel="stylesheet" href="dist/styles.css" />
 </head>
 <body>
     <div ng-app="mapApp" class="page-container">
 
-        <ul class="links" style="display: none;">
-            <li><a href="#/?state=nsw" ng-click="$ctrl.changeState('nsw')">NSW</a></li>
-            <li><a href="#/?state=vic" ng-click="$ctrl.changeState('vic')">VIC</a></li>
-            <li><a href="#/?state=qld" ng-click="$ctrl.changeState('qld')">QLD</a></li>
-        </ul>
+        <header>
+            <div class="logo-container">
+                <div class="container">
+                    <img class="logo" src="images/newsadds.png"/>
+
+                </div>
+            </div>
+            <div class="menu-container">
+                <div class="container">
+                    <span class="current-insight insights">
+
+
+                        <a href="#!?state=nsw">NSW</a>|<a href="#!?state=vic">VIC</a>|<a href="#!?state=qld">QLD</a>
+
+                        Showing insights for ?</span>
+                    <span class="state-insight insights">For state insights on the ?, select
+                        <a href="#/?state=nsw&publication=DT">State/Metro</a>
+                    </span>
+                </div>
+            </div>
+        </header>
+
 
         <div  ng-controller="MapController as ctrl">
             <map-component class="map-container" config="activeMapConfig">
                 <div publications-list class="publications"></div>
                 <div map-area class="map"></div>
-
             </map-component>
         </div>
 

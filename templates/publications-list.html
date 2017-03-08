@@ -2,17 +2,31 @@
     <div class="form-control">
         <input id="pac-input" class="pac-input" type="text" placeholder="Enter suburb to find publication">
     </div>
-    <div class="form-output" ng-if="activePub">
-        <span class="selected-pub">{{activePub}}</span>
-        <ul class="facts" ng-if="activePubFacts">
-            <li ng-repeat="(key, value) in activePubFacts.facts">
-                {{key}}:  {{value}}
-            </li>
-        </ul>
+    <div class="form-output">
+        <div class="content">
+            The publications available in ?
+        </div>
+        <div ng-repeat="publication in publications" ng-if="publication.isSelected">
+            <div class="content">
+                <h3 >{{publication.id}}</h3>
+                <div class="customer-reach">Reaching customers in <span>?</span></div>
+            </div>
+            <ul class="facts">
+                <li ng-repeat="(key, value) in publication.facts">
+                    <div class="content">
+                        <h4>{{key}}</h4>
+                        <label>{{value}}</label>
+                    </div>
+                </li>
+            </ul>
+        </div>
     </div>
     <ul class="pub-list">
-        <li ng-repeat="publication in publications track by $index" class="{{activePub === publication.id ? 'active': 'none'}}">
+        <li ng-repeat="publication in publications track by $index" class="{{publication.isSelected ? 'active': 'none'}}">
             <a ng-click="onClickPublicationLink(publication)" href="">{{publication.id}}</a>
         </li>
     </ul>
+</div>
+<div class="disclaimer" style="background: none;">
+    *  Map data reflects distribution as at 01/01/2017
 </div>

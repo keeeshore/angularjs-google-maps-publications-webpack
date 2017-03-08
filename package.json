@@ -3,10 +3,9 @@
   "version": "1.0.0",
   "description": "AngularJS with news publications and map",
   "scripts": {
-    "build": "",
-	"test": "karma start",
-    "start": "webpack && http-server",
-	"build": "npm run test && npm run start"
+    "build": "npm run test && npm run start",
+    "test": "karma start",
+    "start": "webpack && http-server"
   },
   "license": "MIT",
   "devDependencies": {
@@ -23,6 +22,8 @@
     "karma-jasmine": "^1.1.0",
     "karma-typescript": "^2.1.7",
     "karma-webpack": "^2.0.2",
+    "node-sass": "^4.5.0",
+    "sass-loader": "^6.0.2",
     "style-loader": "^0.13.2",
     "typescript": "^2.2.1",
     "webpack": "^2.2.1"
