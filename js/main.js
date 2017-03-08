@@ -117,10 +117,6 @@ var mapApp = angular.module('mapApp', []);
 
 mapApp.controller('MapController', ['$rootScope', '$scope', '$timeout', '$location', function ($rootScope, $scope, $timeout, $location) {
 
-    $scope.test = {str1:'----', str2: '----'};
-
-    $scope.isApiLoaded = false;
-
     $scope.activeMapConfig = null;
 
     $scope.$on('$locationChangeSuccess', function (location) {
@@ -408,7 +404,9 @@ mapApp.directive('publicationsList', ['mapService', '$location', function (mapSe
             var searchOpts = { componentRestrictions: { country: 'au' }, types: ['geocode'] };
             var search;
 
-            $scope.activePlace = null;
+            $scope.searchedPlace = null;
+
+            $scope.isNewStateSearch = false;
 
             $scope.pubFacts = [];
 
@@ -447,20 +445,25 @@ mapApp.directive('publicationsList', ['mapService', '$location', function (mapSe
                         console.warn('[FAIL] No place found..');
                         return;
                     }
+                    $scope.searchedPlace = place;
+
                     state = place.address_components.filter(function(address){
                         return address.types[0] === 'administrative_area_level_1' && address.types[1] === 'political';
                     });
+
                     if (state.length > 0 && state[0].short_name !== $scope.activeMapConfig.state) {
+                        //TODO pass search url?
                         $location.search('state', state[0].short_name);
-                        $scope.activePlace = place;
+                        $scope.isNewStateSearch = true;
                     } else {
-                        $scope.activePlace = null;
+                        $scope.isNewStateSearch = false;
                     }
+
                     mapService.searchMapLocation(place);
                 },
 
                 addPublications: function (data) {
-                    $scope.publications = data.features.map(function(feature){
+                    $scope.publications = data.features.map(function(feature) {
                         return {
                             id: feature.id,
                             properties: feature.properties,
@@ -468,10 +471,10 @@ mapApp.directive('publicationsList', ['mapService', '$location', function (mapSe
                             facts: []
                         }
                     });
-                    if ($scope.activePlace) {
+                    if ($scope.isNewStateSearch) {
                         //TODO:refactor
                         $timeout(function () {
-                            mapService.searchMapLocation($scope.activePlace);
+                            mapService.searchMapLocation($scope.searchedPlace);
                         }, 300);
                     }
 
@@ -483,6 +486,7 @@ mapApp.directive('publicationsList', ['mapService', '$location', function (mapSe
                         pubObj.isSelected = featureIds.indexOf(pubObj.id) !== -1 ? true : false;
                         pubObj.facts = this.getPublicationFact(pubObj.id)
                     }.bind(this));
+
                     if (apply) {
                         $scope.$apply();
                     }

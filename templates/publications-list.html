@@ -4,7 +4,7 @@
     </div>
     <div class="form-output">
         <div class="content">
-            The publications available in ?
+            The publications available in {{searchedPlace.vicinity}}
         </div>
         <div ng-repeat="publication in publications" ng-if="publication.isSelected">
             <div class="content">
@@ -21,7 +21,7 @@
             </ul>
         </div>
     </div>
-    <ul class="pub-list">
+    <ul class="pub-list" style="display:none;">
         <li ng-repeat="publication in publications track by $index" class="{{publication.isSelected ? 'active': 'none'}}">
             <a ng-click="onClickPublicationLink(publication)" href="">{{publication.id}}</a>
         </li>

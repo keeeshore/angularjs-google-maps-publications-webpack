@@ -145,7 +145,6 @@ describe('MapApp', function() {
             var controller = $controller('MapController', {
                 $scope: $scope
             });
-            expect($scope.test).toEqual({str1:'----', str2: '----'});
             expect($scope.activeMapConfig).toEqual(null);
         });
 

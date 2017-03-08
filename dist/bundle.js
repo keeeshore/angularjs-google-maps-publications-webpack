@@ -17549,7 +17549,7 @@ exports = module.exports = __webpack_require__(3)();
 
 
 // module
-exports.push([module.i, "/* http://meyerweb.com/eric/tools/css/reset/\r\n   v2.0 | 20110126\r\n   License: none (public domain)\r\n*/\nhtml, body, div, span, applet, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, img, ins, kbd, q, s, samp,\nsmall, strike, strong, sub, sup, tt, var,\nb, u, i, center,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, embed,\nfigure, figcaption, footer, header, hgroup,\nmenu, nav, output, ruby, section, summary,\ntime, mark, audio, video {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-size: 100%;\n  font: inherit;\n  vertical-align: baseline; }\n\n/* HTML5 display-role reset for older browsers */\narticle, aside, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section {\n  display: block; }\n\nbody {\n  line-height: 1; }\n\nol, ul {\n  list-style: none; }\n\nblockquote, q {\n  quotes: none; }\n\nblockquote:before, blockquote:after,\nq:before, q:after {\n  content: '';\n  content: none; }\n\ntable {\n  border-collapse: collapse;\n  border-spacing: 0; }\n\n/* CUSTOM CSS START*/\nbody {\n  font-family: 'Noto Sans', 'PT Sans', 'Open Sans', 'Helvetica Neue', Arial, Helvetica, sans-serif;\n  margin: 0px;\n  padding: 0px;\n  background: url(\"/images/mosaic.png\") repeat; }\n\n.page-container {\n  margin: 0px auto;\n  width: 100%; }\n\nheader .container {\n  width: 70%;\n  margin: 0px auto; }\n\nheader .logo-container {\n  background: #3f4652;\n  padding: 10px; }\n\nheader .menu-container {\n  background: #d8d8d8;\n  font-size: 21px;\n  padding: 10px 0px; }\n  header .menu-container span.insights {\n    width: 45%;\n    display: inline-block; }\n  header .menu-container span.state-insight {\n    text-align: right; }\n\n.map-container {\n  overflow: auto;\n  vertical-align: top;\n  width: 100%;\n  display: inline-block;\n  position: fixed;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  top: 110px; }\n\n.map {\n  width: 70%;\n  height: 100%; }\n\n.publications {\n  width: 30%;\n  height: 97%;\n  position: relative;\n  overflow: auto;\n  float: right;\n  margin: 0px;\n  color: #6f6f6f;\n  font-size: 100%;\n  margin: 10px 10px 0px 10px;\n  background: #FFF; }\n  .publications .publications-data {\n    padding: 20px; }\n  .publications .form-control {\n    font-size: 100%;\n    margin: 0px;\n    padding-bottom: 30px;\n    border-bottom: 1px solid #dddddd; }\n    .publications .form-control label {\n      display: inline-block;\n      text-align: right; }\n    .publications .form-control input#pac-input {\n      width: 95%;\n      display: inline-block;\n      padding: 10px;\n      font-size: 18px; }\n  .publications .form-output {\n    padding: 20px 0px;\n    font-size: 18px;\n    border-bottom: 1px solid #dddddd;\n    background: #424345;\n    border-radius: 5px;\n    color: #FFF;\n    text-align: center; }\n    .publications .form-output .content {\n      margin: 10px; }\n    .publications .form-output h3 {\n      font-size: 15px; }\n    .publications .form-output ul.facts {\n      border-top: 1px solid #CCC;\n      border-bottom: 1px solid #CCC;\n      margin: 0px;\n      padding: 0px;\n      width: 100%;\n      text-align: center;\n      vertical-align: top; }\n      .publications .form-output ul.facts li {\n        display: inline-block;\n        min-width: 49%;\n        margin: 0px;\n        padding: 0px;\n        text-align: center; }\n        .publications .form-output ul.facts li h4 {\n          font-size: 15px;\n          display: block;\n          margin: 0px; }\n        .publications .form-output ul.facts li label {\n          font-weight: bold; }\n        .publications .form-output ul.facts li:nth-child(odd) {\n          border-right: 1px solid #CCC; }\n  .publications.ng-scope:after {\n    content: \"\";\n    display: block;\n    position: fixed;\n    bottom: 0;\n    left: 0;\n    width: 100%;\n    height: 5%;\n    background: linear-gradient(transparent, #ddd) left repeat; }\n  .publications .pub-list {\n    display: block;\n    vertical-align: top;\n    margin: 10px 0px;\n    padding: 0px;\n    overflow: auto; }\n    .publications .pub-list li {\n      margin: 0px;\n      padding: 0px;\n      list-style: none; }\n      .publications .pub-list li a {\n        display: block;\n        margin: 0px;\n        padding: 5px 0px 5px 10px;\n        border-bottom: 1px solid #CCC;\n        text-decoration: none;\n        color: #6f6f6f; }\n      .publications .pub-list li.active a {\n        background: #CC0000;\n        color: #FFF; }\n\n.disclaimer {\n  position: relative;\n  z-index: 100;\n  background: white;\n  width: auto;\n  float: left;\n  padding: 10px;\n  font-size: 12px;\n  margin: 7px;\n  opacity: 0.7; }\n", ""]);
+exports.push([module.i, "/* http://meyerweb.com/eric/tools/css/reset/\r\n   v2.0 | 20110126\r\n   License: none (public domain)\r\n*/\nhtml, body, div, span, applet, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, img, ins, kbd, q, s, samp,\nsmall, strike, strong, sub, sup, tt, var,\nb, u, i, center,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, embed,\nfigure, figcaption, footer, header, hgroup,\nmenu, nav, output, ruby, section, summary,\ntime, mark, audio, video {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-size: 100%;\n  font: inherit;\n  vertical-align: baseline; }\n\n/* HTML5 display-role reset for older browsers */\narticle, aside, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section {\n  display: block; }\n\nbody {\n  line-height: 1; }\n\nol, ul {\n  list-style: none; }\n\nblockquote, q {\n  quotes: none; }\n\nblockquote:before, blockquote:after,\nq:before, q:after {\n  content: '';\n  content: none; }\n\ntable {\n  border-collapse: collapse;\n  border-spacing: 0; }\n\n/* CUSTOM CSS START*/\nbody {\n  font-family: 'Noto Sans', 'PT Sans', 'Open Sans', 'Helvetica Neue', Arial, Helvetica, sans-serif;\n  margin: 0px;\n  padding: 0px;\n  background: url(\"/images/mosaic.png\") repeat; }\n\n.page-container {\n  margin: 0px auto;\n  width: 100%; }\n\nheader .container {\n  width: 70%;\n  margin: 0px auto; }\n\nheader .logo-container {\n  background: #3f4652;\n  padding: 10px; }\n\nheader .menu-container {\n  background: #d8d8d8;\n  font-size: 21px;\n  padding: 10px 0px; }\n  header .menu-container span.insights {\n    width: 45%;\n    display: inline-block; }\n  header .menu-container span.state-insight {\n    text-align: right; }\n\n.map-container {\n  overflow: auto;\n  vertical-align: top;\n  width: 100%;\n  display: inline-block;\n  position: fixed;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  top: 110px; }\n\n.map {\n  width: 70%;\n  height: 100%; }\n\n.publications {\n  width: 30%;\n  height: 97%;\n  position: relative;\n  overflow: auto;\n  float: right;\n  margin: 0px;\n  color: #6f6f6f;\n  font-size: 100%;\n  margin: 10px 10px 0px 10px;\n  background: #FFF; }\n  .publications .publications-data {\n    padding: 20px; }\n  .publications .form-control {\n    font-size: 100%;\n    margin: 0px;\n    padding-bottom: 30px;\n    border-bottom: 1px solid #dddddd; }\n    .publications .form-control label {\n      display: inline-block;\n      text-align: right; }\n    .publications .form-control input#pac-input {\n      width: 95%;\n      display: inline-block;\n      padding: 10px;\n      font-size: 18px; }\n  .publications .form-output {\n    padding: 20px 0px;\n    font-size: 18px;\n    border-bottom: 1px solid #dddddd;\n    background: #424345;\n    border-radius: 5px;\n    color: #FFF;\n    text-align: center; }\n    .publications .form-output .content {\n      margin: 10px; }\n    .publications .form-output h3 {\n      font-size: 20px;\n      line-height: 1.4em; }\n    .publications .form-output .customer-reach {\n      font-size: 18px; }\n      .publications .form-output .customer-reach span {\n        font-weight: bold; }\n    .publications .form-output ul.facts {\n      border-top: 1px solid #CCC;\n      border-bottom: 1px solid #CCC;\n      margin: 0px;\n      padding: 0px;\n      width: 100%;\n      text-align: center;\n      vertical-align: top; }\n      .publications .form-output ul.facts li {\n        display: inline-block;\n        min-width: 49%;\n        margin: 0px;\n        padding: 0px;\n        text-align: center; }\n        .publications .form-output ul.facts li h4 {\n          font-size: 16px;\n          display: block;\n          margin: 5px 0px; }\n        .publications .form-output ul.facts li label {\n          font-weight: 500; }\n        .publications .form-output ul.facts li:nth-child(odd) {\n          border-right: 1px solid #CCC; }\n  .publications.ng-scope:after {\n    content: \"\";\n    display: block;\n    position: fixed;\n    bottom: 0;\n    left: 0;\n    width: 100%;\n    height: 5%;\n    background: linear-gradient(transparent, #ddd) left repeat; }\n  .publications .pub-list {\n    display: block;\n    vertical-align: top;\n    margin: 10px 0px;\n    padding: 0px;\n    overflow: auto; }\n    .publications .pub-list li {\n      margin: 0px;\n      padding: 0px;\n      list-style: none; }\n      .publications .pub-list li a {\n        display: block;\n        margin: 0px;\n        padding: 5px 0px 5px 10px;\n        border-bottom: 1px solid #CCC;\n        text-decoration: none;\n        color: #6f6f6f; }\n      .publications .pub-list li.active a {\n        background: #CC0000;\n        color: #FFF; }\n\n.disclaimer {\n  position: relative;\n  z-index: 100;\n  background: white;\n  width: auto;\n  float: left;\n  padding: 10px;\n  font-size: 12px;\n  margin: 7px;\n  opacity: 0.7; }\n", ""]);
 
 // exports
 
@@ -17897,10 +17897,6 @@ var mapApp = angular.module('mapApp', []);
 
 mapApp.controller('MapController', ['$rootScope', '$scope', '$timeout', '$location', function ($rootScope, $scope, $timeout, $location) {
 
-    $scope.test = { str1: '----', str2: '----' };
-
-    $scope.isApiLoaded = false;
-
     $scope.activeMapConfig = null;
 
     $scope.$on('$locationChangeSuccess', function (location) {
@@ -18182,11 +18178,11 @@ mapApp.directive('publicationsList', ['mapService', '$location', function (mapSe
             var searchOpts = { componentRestrictions: { country: 'au' }, types: ['geocode'] };
             var search;
 
-            $scope.activePlace = null;
+            $scope.searchedPlace = null;
+
+            $scope.isNewStateSearch = false;
 
             $scope.pubFacts = [];
-
-            $scope.activePublications = [];
 
             mapService.onLoadMap(function (options) {
                 if (!this.isInit) {
@@ -18200,10 +18196,6 @@ mapApp.directive('publicationsList', ['mapService', '$location', function (mapSe
                 controller.selectPublication([publication.id], false);
                 mapService.selectMapFeature(publication);
             };
-
-            $scope.$watch('activePublications', function (activePublications) {
-                //TODO
-            });
 
             mapService.onLoadPublications(function (publications) {
                 controller.getAllPublicationFacts().then(function () {
@@ -18227,15 +18219,20 @@ mapApp.directive('publicationsList', ['mapService', '$location', function (mapSe
                         console.warn('[FAIL] No place found..');
                         return;
                     }
+                    $scope.searchedPlace = place;
+
                     state = place.address_components.filter(function (address) {
                         return address.types[0] === 'administrative_area_level_1' && address.types[1] === 'political';
                     });
+
                     if (state.length > 0 && state[0].short_name !== $scope.activeMapConfig.state) {
+                        //TODO pass search url?
                         $location.search('state', state[0].short_name);
-                        $scope.activePlace = place;
+                        $scope.isNewStateSearch = true;
                     } else {
-                        $scope.activePlace = null;
+                        $scope.isNewStateSearch = false;
                     }
+
                     mapService.searchMapLocation(place);
                 },
 
@@ -18248,10 +18245,10 @@ mapApp.directive('publicationsList', ['mapService', '$location', function (mapSe
                             facts: []
                         };
                     });
-                    if ($scope.activePlace) {
+                    if ($scope.isNewStateSearch) {
                         //TODO:refactor
                         $timeout(function () {
-                            mapService.searchMapLocation($scope.activePlace);
+                            mapService.searchMapLocation($scope.searchedPlace);
                         }, 300);
                     }
                 },
@@ -18264,6 +18261,8 @@ mapApp.directive('publicationsList', ['mapService', '$location', function (mapSe
                     }.bind(this));
                     if (apply) {
                         $scope.$apply();
+                    } else {
+                        $scope.searchedPlace = null;
                     }
                 },
 
