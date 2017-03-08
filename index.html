@@ -13,36 +13,32 @@
 <body>
     <div ng-app="mapApp" class="page-container">
 
-        <header>
-            <div class="logo-container">
-                <div class="container">
-                    <img class="logo" src="images/newsadds.png"/>
+        <div ng-controller="MapController as ctrl">
 
+            <header>
+                <div class="logo-container">
+                    <div class="container">
+                        <img class="logo" src="images/newsadds.png"/>
+                    </div>
                 </div>
-            </div>
-            <div class="menu-container">
-                <div class="container">
-                    <span class="current-insight insights">
-
-
-                        <a href="#!?state=nsw">NSW</a>|<a href="#!?state=vic">VIC</a>|<a href="#!?state=qld">QLD</a>
-
-                        Showing insights for ?</span>
-                    <span class="state-insight insights">For state insights on the ?, select
-                        <a href="#/?state=nsw&publication=DT">State/Metro</a>
-                    </span>
+                <div class="menu-container">
+                    <div class="container">
+                        <div class="current-insight insights">
+                            Showing insights for <span>{{activeMapConfig.insights}}</span></div>
+                        <div class="state-insight insights">For state insights on the ?, select
+                            <a href="#!?state=qld&publication=DT">State/Metro</a>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </header>
+            </header>
 
 
-        <div  ng-controller="MapController as ctrl">
             <map-component class="map-container" config="activeMapConfig">
                 <div publications-list class="publications"></div>
                 <div map-area class="map"></div>
             </map-component>
-        </div>
 
+        </div>
 
 
     </div>

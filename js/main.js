@@ -4,114 +4,13 @@
  */
 var angular = require('angular');
 var css = require('../css/global.scss');
+var styles = require('../data/map-styles.json');
+var mapsConfig = require('../data/map-config.json');
 
-var styles = [
-    {
-        "featureType": "administrative",
-        "elementType": "labels.text.fill",
-        "stylers": [
-            {
-                "color": "#444444"
-            }
-        ]
-    },
-    {
-        "featureType": "landscape",
-        "elementType": "all",
-        "stylers": [
-            {
-                "color": "#dcdcdc"
-            },
-            {
-                "lightness": 20
-            }
-        ]
-    },
-    {
-        "featureType": "poi",
-        "elementType": "all",
-        "stylers": [
-            {
-                "visibility": "off"
-            }
-        ]
-    },
-    {
-        "featureType": "poi.business",
-        "elementType": "all",
-        "stylers": [
-            {
-                "visibility": "off"
-            }
-        ]
-    },
-    {
-        "featureType": "road",
-        "elementType": "all",
-        "stylers": [
-            {
-                "saturation": -100
-            },
-            {
-                "lightness": 45
-            }
-        ]
-    },
-    {
-        "featureType": "road.highway",
-        "elementType": "all",
-        "stylers": [
-            {
-                "visibility": "simplified"
-            }
-        ]
-    },
-    {
-        "featureType": "road.arterial",
-        "elementType": "labels.icon",
-        "stylers": [
-            {
-                "visibility": "off"
-            }
-        ]
-    },
-    {
-        "featureType": "transit",
-        "elementType": "all",
-        "stylers": [
-            {
-                "visibility": "off"
-            }
-        ]
-    },
-    {
-        "featureType": "water",
-        "elementType": "all",
-        "stylers": [
-            {
-                "color": "#B4E4F9"
-            },
-            {
-                "visibility": "on"
-            }
-        ]
-    }
-];
-var mapsConfig = {
-    NSW: {
-        state: 'NSW',
-        geoJson: 'data/nsw.json',
-        center: { lat: -33.8899191578029, lng: 151.20217386753,  },
-        styles: styles
-    },
-    QLD: {
-        state: 'QLD',
-        geoJson: 'data/qld.json',
-        center: { lat: -27.470125, lng: 153.021072 },
-        styles: styles
-    }
-};
-
+mapsConfig.NSW.styles = styles;
+mapsConfig.QLD.styles = styles;
+mapsConfig.VIC.styles = styles;
+mapsConfig.SA.styles = styles;
 
 var mapApp = angular.module('mapApp', []);
 
@@ -120,6 +19,7 @@ mapApp.controller('MapController', ['$rootScope', '$scope', '$timeout', '$locati
     $scope.activeMapConfig = null;
 
     $scope.$on('$locationChangeSuccess', function (location) {
+        console.log('$locationChangeSuccess-------------', $location.path());
         var state = $location.search().state || 'nsw';
         if (mapsConfig[state.toUpperCase()]) {
             $scope.activeMapConfig = mapsConfig[state.toUpperCase()];
@@ -234,6 +134,7 @@ mapApp.component('mapComponent', {
         };
 
         this.$onChanges =  function (changes) {
+            console.log('mapComponent has changes...reload map');
             this.config = angular.merge(mapService.defaults, this.config);
             mapService.loadMap(this.config);
         };
@@ -267,6 +168,7 @@ mapApp.directive('mapArea', ['mapService', function (mapService) {
                     map.data.revertStyle();
                     controller.selectMapFeature(event.feature);
                     mapService.selectMapPublication(event.feature.getId(), clearSearchInput);
+                    controller.selectClosestMapFeatures(event.feature.getId());
                 });
 
             }.bind(this));
@@ -330,6 +232,17 @@ mapApp.directive('mapArea', ['mapService', function (mapService) {
                     }
                 },
 
+                selectClosestMapFeatures: function (featureId) {
+                    angular.forEach($scope.activeMapConfig.publicationsMapping, function (pubMapping) {
+                        if (pubMapping.id === featureId) {
+                            angular.forEach(pubMapping.closest, function (closestPubId) {
+                                var feature = map.data.getFeatureById(closestPubId);
+                                map.data.overrideStyle(feature, { zIndex:99, strokeColor: 'green', strokeWeight: 1 })
+                            }.bind(this))
+                        }
+                    }.bind(this));
+                },
+
                 setMapSearchLocation: function (place) {
                     var selectedFeatures = [],
                         featureIds = [];
@@ -367,17 +280,11 @@ mapApp.directive('mapArea', ['mapService', function (mapService) {
 
                     console.log('contains [', selectedFeatures.length, ']location ----');
 
-                    if (selectedFeatures.length > 0) {
-                        map.data.revertStyle();
-                        angular.forEach(selectedFeatures, function (feature) {
-                            this.selectMapFeature(feature);
-                            mapService.selectMapPublication(featureIds);
-                        }.bind(this));
-
-                    } else {
-                        map.data.revertStyle();
-                        mapService.selectMapPublication('');
-                    }
+                    map.data.revertStyle();
+                    angular.forEach(selectedFeatures, function (feature) {
+                        this.selectMapFeature(feature);
+                        mapService.selectMapPublication(featureIds);
+                    }.bind(this));
                 }
 
             };
@@ -401,7 +308,7 @@ mapApp.directive('publicationsList', ['mapService', '$location', function (mapSe
             return $attrs.templateUrl || 'templates/publications-list.html';
         },
 
-        link: function ($scope, $element, attr, controller, $timeout) {
+        link: function ($scope, $element, attr, controller) {
             var searchOpts = { componentRestrictions: { country: 'au' }, types: ['geocode'] };
             var search;
 
@@ -458,8 +365,10 @@ mapApp.directive('publicationsList', ['mapService', '$location', function (mapSe
 
                     if (state.length > 0 && state[0].short_name !== $scope.activeMapConfig.state) {
                         //TODO pass search url?
+                        console.log('changing location search -------------- to ', state[0].short_name);
                         $location.search('state', state[0].short_name);
                         $scope.isNewStateSearch = true;
+                        $scope.$apply(); //TODO why this again?
                     } else {
                         $scope.isNewStateSearch = false;
                     }

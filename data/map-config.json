@@ -1,0 +1,43 @@
+{
+  "NSW": {
+	"state": "NSW",
+	"geoJson": "data/nsw.json",
+	"insights": "Sydney Local Community Newspaper",
+	"center": { "lat": -33.8899191578029, "lng": 151.20217386753  },
+	"publicationsMapping": [
+	  {
+		"id": "Penrith Press",
+		"closest": [ "The Mt Druitt St Marys Standard", "Macarthur Chronicle" ]
+	  },
+	  {
+		"id": "The Mt Druitt St Marys Standard",
+		"closest": [ "Blacktown Advocate", "Rouse Hill Times", "Penrith Press" ]
+	  },
+	  {
+		"id": "Rouse Hill Times",
+		"closest": [ "Hills Shire Times", "Blacktown Advocate", "The Mt Druitt St Marys Standard" ]
+	  }
+	]
+  },
+  "QLD": {
+	"state": "QLD",
+	"geoJson": "data/qld.json",
+	"insights": "Brisbane Local Community Newspaper",
+	"center": { "lat": -27.470125, "lng": 153.021072 },
+	"styles": []
+  },
+  "SA": {
+	"state": "SA",
+	"geoJson": "",
+	"insights": "",
+	"center": { "lat": 0, "lng": 0 },
+	"styles": []
+  },
+  "VIC": {
+	"state": "VIC",
+	"geoJson": "",
+	"insights": "",
+	"center": { "lat": 0, "lng": 0 },
+	"styles": []
+  }
+}

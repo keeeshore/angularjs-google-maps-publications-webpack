@@ -22,7 +22,7 @@
         </div>
     </div>
 
-    <ul class="pub-list" style="display:none;">
+    <ul class="pub-list" style="display: none;">
         <li ng-repeat="publication in publications track by $index" class="{{publication.isSelected ? 'active': 'none'}}">
             <a ng-click="onClickPublicationLink(publication)" href="">{{publication.id}}</a>
         </li>
