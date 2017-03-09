@@ -7,16 +7,84 @@
 	"statePublication": "The Daily Telegraph",
 	"publicationsMapping": [
 	  {
-		"id": "Penrith Press",
-		"closest": [ "The Mt Druitt St Marys Standard", "Macarthur Chronicle" ]
+		"id": "Blacktown Advocate",
+		"closest": [ "Hills Shire Times", "Rouse Hill Times", "Parramatta Advertiser", "Fairfield Advance", "The Mt Druitt St Marys Standard" ]
+	  },
+	  {
+		"id": "The Canterbury Bankstown Express",
+		"closest": [ "Inner West Courier", "Parramatta Advertiser", "Fairfield Advance", "Liverpool Leader" ]
+	  },
+	  {
+		"id": "Central Coast Express Advocate",
+		"closest": [ ]
+	  },
+	  {
+		"id": "Central Sydney",
+		"closest": [ "Wentworth Courier", "Southern Courier", "Inner West Courier" ]
+	  },
+	  {
+		"id": "Fairfield Advance",
+		"closest": ["Parramatta Advertiser", "The Canterbury Bankstown Express", "Liverpool Leader", "Blacktown Advocate", "The Mt Druitt St Marys Standard" ]
+	  },
+	  {
+		"id": "Hills Shire Times",
+		"closest": [ "Hornsby Advocate", "Northern District Times", "Parramatta Advertiser", "Blacktown Advocate", "Rouse Hill Times"]
+	  },
+	  {
+		"id": "Hornsby Advocate",
+		"closest": [ "North Shore Times", "Northern District Times", "Hills Shire Times"]
+	  },
+	  {
+		"id": "Inner West Courier",
+		"closest": [ "Central Sydney", "Southern Courier", "The Canterbury Bankstown Express" ]
+	  },
+	  {
+		"id": "Liverpool Leader",
+		"closest": [ "Fairfield Advance", "Macarthur Chronicle", "The Canterbury Bankstown Express" ]
+	  },
+	  {
+		"id": "Manly Daily",
+		"closest": [ "North Shore Times" ]
+	  },
+	  {
+		"id": "Mosman Daily",
+		"closest": [ "North Shore Times" ]
 	  },
 	  {
 		"id": "The Mt Druitt St Marys Standard",
 		"closest": [ "Blacktown Advocate", "Rouse Hill Times", "Penrith Press" ]
 	  },
 	  {
+		"id": "North Shore Times",
+		"closest": [ "Manly Daily", "Northern District Times", "Mosman Daily", "Hornsby Advocate" ]
+	  },
+	  {
+		"id": "Northern District Times",
+		"closest": [ "North Shore Times", "Hornsby Advocate", "Parramatta Advertiser", "Hills Shire Times" ]
+	  },
+	  {
+		"id": "Parramatta Advertiser",
+		"closest": [ "Northern District Times", "Blacktown Advocate", "Fairfield Advance", "Hills Shire Times", "The Canterbury Bankstown Express" ]
+	  },
+	  {
+		"id": "Penrith Press",
+		"closest": [ "The Mt Druitt St Marys Standard", "Macarthur Chronicle" ]
+	  },
+	  {
 		"id": "Rouse Hill Times",
 		"closest": [ "Hills Shire Times", "Blacktown Advocate", "The Mt Druitt St Marys Standard" ]
+	  },
+	  {
+		"id": "Southern Courier",
+		"closest": [ "Wentworth Courier", "Central Sydney",  "Inner West Courier" ]
+	  },
+	  {
+		"id": "Macarthur Chronicle",
+		"closest": ["Liverpool Leader", "Penrith Press"]
+	  },
+	  {
+		"id": "Wentworth Courier",
+		"closest": ["Southern Courier", "Central Sydney"]
 	  }
 	]
   },

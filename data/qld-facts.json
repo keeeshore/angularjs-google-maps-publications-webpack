@@ -14,7 +14,7 @@
     }
   },
   {
-    "id": "Caboolture Herald",
+    "id": "Caboolture Shire Herald",
     "facts": {
       "Readership": "37,000",
       "Circulation": "34,151"
@@ -49,14 +49,14 @@
     }
   },
   {
-    "id": "Pine Rivers Press/North Lakes Times",
+    "id": "Pine Rivers Press / North Lakes Times",
     "facts": {
       "Readership": "47,000",
       "Circulation": "37,575"
     }
   },
   {
-    "id": "Redcliffe &amp; Bayside Herald",
+    "id": "Redcliffe & Bayside Herald",
     "facts": {
       "Readership": "45,000",
       "Circulation": "32,246"
@@ -77,7 +77,7 @@
     }
   },
   {
-    "id": "South-West News/Springfield News",
+    "id": "South-West News / Springfield News",
     "facts": {
       "Readership": "51,000",
       "Circulation": "55,434"

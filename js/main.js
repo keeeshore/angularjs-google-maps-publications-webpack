@@ -37,6 +37,7 @@ mapApp.factory('mapService', ['$timeout', function ($timeout) {
         selectMapCallbacks = [],
         selectPubCallbacks = [],
         searchMapCallbacks = [],
+        pubFactCallbacks = [],
         defaults = {
             zoom: 10,
             center: { lat: -27.470125, lng: 153.021072 },
@@ -108,7 +109,20 @@ mapApp.factory('mapService', ['$timeout', function ($timeout) {
 
         onSearchMapLocation: function (cb) {
             searchMapCallbacks.push(cb);
+        },
+
+        getPublicationFactById: function (featureId) {
+            var fact;
+            pubFactCallbacks.forEach(function(cb) {
+                fact = cb(featureId);
+            }.bind(this));
+            return fact;
+        },
+
+        onGetPublicationFactById: function (cb) {
+            pubFactCallbacks.push(cb);
         }
+
 
     }
 
@@ -145,7 +159,8 @@ mapApp.component('mapComponent', {
 
 mapApp.directive('mapArea', ['mapService', function (mapService) {
 
-    var map;
+    var map,
+        infoWindow;
 
     return {
 
@@ -160,7 +175,10 @@ mapApp.directive('mapArea', ['mapService', function (mapService) {
         link: function ($scope, $element, attr, controller) {
 
             mapService.onLoadMap(function (options) {
+
                 map = controller.renderMap(options, $element[0].querySelector('.geo-map-data'));
+                infoWindow = new google.maps.InfoWindow();
+
                 controller.loadGeoJson(map, options.geoJson);
 
                 map.data.addListener('click', function(event) {
@@ -171,6 +189,16 @@ mapApp.directive('mapArea', ['mapService', function (mapService) {
                     controller.selectClosestMapFeatures(featureId);
                     mapService.selectMapPublication(featureId, clearSearchInput);
                 });
+
+                map.data.addListener('mouseover', function(event) {
+                    var fact = mapService.getPublicationFactById(event.feature.getId());
+                    infoWindow.setContent('<strong>Readership:</strong>'+ fact.Readership + ', <strong> Circulation:</strong>' + fact.Circulation);
+                    infoWindow.setPosition({
+                        lat: event.feature.getProperty('centroid')[1],
+                        lng: event.feature.getProperty('centroid')[0]
+                    });
+                    infoWindow.open(map);
+                }.bind(this));
 
             }.bind(this));
 
@@ -353,6 +381,15 @@ mapApp.directive('publicationsList', ['mapService', '$location', function (mapSe
                     controller.clearSearchInput();
                 }
                 controller.selectPublication(featureId, true);
+            });
+
+            mapService.onGetPublicationFactById(function (featureId) {
+                /*var pubs = $scope.pubFacts.filter(function (factObj) {
+                    return featureIds.indexOf(factObj.id) != -1;
+                });*/
+                var pubs = controller.getPublicationFact(featureId);
+                console.log('selected pubs = ', pubs);
+                return pubs;
             });
         },
 

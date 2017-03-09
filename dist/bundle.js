@@ -82,10 +82,90 @@ module.exports = {
 		"statePublication": "The Daily Telegraph",
 		"publicationsMapping": [
 			{
-				"id": "Penrith Press",
+				"id": "Blacktown Advocate",
 				"closest": [
-					"The Mt Druitt St Marys Standard",
-					"Macarthur Chronicle"
+					"Hills Shire Times",
+					"Rouse Hill Times",
+					"Parramatta Advertiser",
+					"Fairfield Advance",
+					"The Mt Druitt St Marys Standard"
+				]
+			},
+			{
+				"id": "The Canterbury Bankstown Express",
+				"closest": [
+					"Inner West Courier",
+					"Parramatta Advertiser",
+					"Fairfield Advance",
+					"Liverpool Leader"
+				]
+			},
+			{
+				"id": "Central Coast Express Advocate",
+				"closest": []
+			},
+			{
+				"id": "Central Sydney",
+				"closest": [
+					"Wentworth Courier",
+					"Southern Courier",
+					"Inner West Courier"
+				]
+			},
+			{
+				"id": "Fairfield Advance",
+				"closest": [
+					"Parramatta Advertiser",
+					"The Canterbury Bankstown Express",
+					"Liverpool Leader",
+					"Blacktown Advocate",
+					"The Mt Druitt St Marys Standard"
+				]
+			},
+			{
+				"id": "Hills Shire Times",
+				"closest": [
+					"Hornsby Advocate",
+					"Northern District Times",
+					"Parramatta Advertiser",
+					"Blacktown Advocate",
+					"Rouse Hill Times"
+				]
+			},
+			{
+				"id": "Hornsby Advocate",
+				"closest": [
+					"North Shore Times",
+					"Northern District Times",
+					"Hills Shire Times"
+				]
+			},
+			{
+				"id": "Inner West Courier",
+				"closest": [
+					"Central Sydney",
+					"Southern Courier",
+					"The Canterbury Bankstown Express"
+				]
+			},
+			{
+				"id": "Liverpool Leader",
+				"closest": [
+					"Fairfield Advance",
+					"Macarthur Chronicle",
+					"The Canterbury Bankstown Express"
+				]
+			},
+			{
+				"id": "Manly Daily",
+				"closest": [
+					"North Shore Times"
+				]
+			},
+			{
+				"id": "Mosman Daily",
+				"closest": [
+					"North Shore Times"
 				]
 			},
 			{
@@ -97,11 +177,68 @@ module.exports = {
 				]
 			},
 			{
+				"id": "North Shore Times",
+				"closest": [
+					"Manly Daily",
+					"Northern District Times",
+					"Mosman Daily",
+					"Hornsby Advocate"
+				]
+			},
+			{
+				"id": "Northern District Times",
+				"closest": [
+					"North Shore Times",
+					"Hornsby Advocate",
+					"Parramatta Advertiser",
+					"Hills Shire Times"
+				]
+			},
+			{
+				"id": "Parramatta Advertiser",
+				"closest": [
+					"Northern District Times",
+					"Blacktown Advocate",
+					"Fairfield Advance",
+					"Hills Shire Times",
+					"The Canterbury Bankstown Express"
+				]
+			},
+			{
+				"id": "Penrith Press",
+				"closest": [
+					"The Mt Druitt St Marys Standard",
+					"Macarthur Chronicle"
+				]
+			},
+			{
 				"id": "Rouse Hill Times",
 				"closest": [
 					"Hills Shire Times",
 					"Blacktown Advocate",
 					"The Mt Druitt St Marys Standard"
+				]
+			},
+			{
+				"id": "Southern Courier",
+				"closest": [
+					"Wentworth Courier",
+					"Central Sydney",
+					"Inner West Courier"
+				]
+			},
+			{
+				"id": "Macarthur Chronicle",
+				"closest": [
+					"Liverpool Leader",
+					"Penrith Press"
+				]
+			},
+			{
+				"id": "Wentworth Courier",
+				"closest": [
+					"Southern Courier",
+					"Central Sydney"
 				]
 			}
 		]
@@ -18017,6 +18154,7 @@ mapApp.factory('mapService', ['$timeout', function ($timeout) {
         selectMapCallbacks = [],
         selectPubCallbacks = [],
         searchMapCallbacks = [],
+        pubFactCallbacks = [],
         defaults = {
         zoom: 10,
         center: { lat: -27.470125, lng: 153.021072 },
@@ -18088,6 +18226,18 @@ mapApp.factory('mapService', ['$timeout', function ($timeout) {
 
         onSearchMapLocation: function (cb) {
             searchMapCallbacks.push(cb);
+        },
+
+        getPublicationFactById: function (featureId) {
+            var fact;
+            pubFactCallbacks.forEach(function (cb) {
+                fact = cb(featureId);
+            }.bind(this));
+            return fact;
+        },
+
+        onGetPublicationFactById: function (cb) {
+            pubFactCallbacks.push(cb);
         }
 
     };
@@ -18123,7 +18273,7 @@ mapApp.component('mapComponent', {
 
 mapApp.directive('mapArea', ['mapService', function (mapService) {
 
-    var map;
+    var map, infoWindow;
 
     return {
 
@@ -18138,7 +18288,10 @@ mapApp.directive('mapArea', ['mapService', function (mapService) {
         link: function ($scope, $element, attr, controller) {
 
             mapService.onLoadMap(function (options) {
+
                 map = controller.renderMap(options, $element[0].querySelector('.geo-map-data'));
+                infoWindow = new google.maps.InfoWindow();
+
                 controller.loadGeoJson(map, options.geoJson);
 
                 map.data.addListener('click', function (event) {
@@ -18149,6 +18302,16 @@ mapApp.directive('mapArea', ['mapService', function (mapService) {
                     controller.selectClosestMapFeatures(featureId);
                     mapService.selectMapPublication(featureId, clearSearchInput);
                 });
+
+                map.data.addListener('mouseover', function (event) {
+                    var fact = mapService.getPublicationFactById(event.feature.getId());
+                    infoWindow.setContent('<strong>Readership:</strong>' + fact.Readership + ', <strong> Circulation:</strong>' + fact.Circulation);
+                    infoWindow.setPosition({
+                        lat: event.feature.getProperty('centroid')[1],
+                        lng: event.feature.getProperty('centroid')[0]
+                    });
+                    infoWindow.open(map);
+                }.bind(this));
             }.bind(this));
 
             mapService.onSelectMapFeature(function (feature) {
@@ -18329,6 +18492,15 @@ mapApp.directive('publicationsList', ['mapService', '$location', function (mapSe
                     controller.clearSearchInput();
                 }
                 controller.selectPublication(featureId, true);
+            });
+
+            mapService.onGetPublicationFactById(function (featureId) {
+                /*var pubs = $scope.pubFacts.filter(function (factObj) {
+                    return featureIds.indexOf(factObj.id) != -1;
+                });*/
+                var pubs = controller.getPublicationFact(featureId);
+                console.log('selected pubs = ', pubs);
+                return pubs;
             });
         },
 

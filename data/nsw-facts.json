@@ -7,7 +7,7 @@
 	}
   },
   {
-	"id": "Canterbury-Bankstown Express",
+	"id": "The Canterbury Bankstown Express",
 	"facts": {
 	  "Readership": "69,000",
 	  "Circulation": "70,926"
@@ -42,30 +42,16 @@
 	}
   },
   {
-	"id": "Hornsby & Upper North Shore Advocate",
+	"id": "Hornsby Advocate",
 	"facts": {
 	  "Readership": "53,000",
 	  "Circulation": "47,365"
 	}
   },
   {
-	"id": "Inner West Courier - City edn",
-	"facts": {
-	  "Readership": "97,000",
-	  "Circulation": "39,183"
-	}
-  },
-  {
-	"id": "Inner West Courier - West edn",
-	"facts": {
-	  "Readership": "0",
-	  "Circulation": "43,081"
-	}
-  },
-  {
 	"id": "Inner West Courier",
 	"facts": {
-	  "Readership": "0",
+	  "Readership": "97,000",
 	  "Circulation": "82,264"
 	}
   },
@@ -98,14 +84,14 @@
 	}
   },
   {
-	"id": "Mt Druitt St Marys Standard",
+	"id": "The Mt Druitt St Marys Standard",
 	"facts": {
 	  "Readership": "45,000",
 	  "Circulation": "36,396"
 	}
   },
   {
-	"id": "North Shore Times ",
+	"id": "North Shore Times",
 	"facts": {
 	  "Readership": "76,000",
 	  "Circulation": "68,495"
@@ -126,7 +112,7 @@
 	}
   },
   {
-	"id": "Penrith Press ",
+	"id": "Penrith Press",
 	"facts": {
 	  "Readership": "54,000",
 	  "Circulation": "49,789"
