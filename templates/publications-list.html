@@ -2,11 +2,15 @@
     <div class="form-control">
         <input id="pac-input" class="pac-input" type="text" placeholder="Enter suburb to find publication">
     </div>
+
     <div class="form-output">
-        <div class="search-place content" ng-if="searchedPlace">
+        <a class="toggle-btn" href="" ng-click="isPublicationDataOpen = !isPublicationDataOpen">
+            {{isPublicationDataOpen ? 'close' : 'open' }}
+        </a>
+        <div class="search-place" ng-if="searchedPlace">
             The publications available in {{searchedPlace.vicinity}}
         </div>
-        <div ng-repeat="publication in publications" ng-if="publication.isSelected">
+        <div ng-repeat="publication in publications" ng-if="publication.isSelected && isPublicationDataOpen">
             <div class="content">
                 <h3 >{{publication.id}}</h3>
                 <div class="customer-reach">Reaching customers in <span>?</span></div>
@@ -22,12 +26,23 @@
         </div>
     </div>
 
-    <ul class="pub-list">
+    <h4 class="publication-header">Publications
+        <a class="toggle-btn"
+           href=""
+           ng-click="isPublicationListOpen = !isPublicationListOpen">
+            {{isPublicationListOpen ? 'close' : 'open' }}
+        </a>
+    </h4>
+
+    <ul class="pub-list" ng-if="isPublicationListOpen">
         <li ng-repeat="publication in publications track by $index" class="{{publication.isSelected ? 'active': 'none'}}">
             <a ng-click="onClickPublicationLink(publication)" href="">{{publication.id}}</a>
         </li>
     </ul>
+
 </div>
+
 <div class="disclaimer" style="background: none;">
     *  Map data reflects distribution as at 01/01/2017
 </div>
+

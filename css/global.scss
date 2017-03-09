@@ -114,10 +114,12 @@ header {
     right: 0;
     top: 110px;
 }
+
 .map {
     width: 70%;
     height: 100%;
 }
+
 .publications {
     width: 30%;
     height: 97%;
@@ -129,6 +131,7 @@ header {
     font-size: 100%;
     margin: 10px 10px 0px 10px;
     background: #FFF;
+
 
   .publications-data {
     padding: 20px;
@@ -156,6 +159,7 @@ header {
   }
 
   .form-output {
+
     padding: 3px 0px;
     font-size: 18px;
     border-bottom: 1px solid #dddddd;
@@ -163,6 +167,16 @@ header {
     border-radius: 5px;
     color: #FFF;
     text-align: center;
+    overflow: auto;
+
+    .toggle-btn {
+      display: block;
+      text-align: right;
+      text-decoration: underline;
+      font-size: 11px;
+      margin: 0px 5px 0px 5px;
+      color: white;
+    }
 
     .content {
       margin: 10px;
@@ -171,6 +185,7 @@ header {
     .search-place {
       padding-bottom: 10px;
       border-bottom: 1px solid #CCC;
+      margin-top: 16px;
     }
 
     h3 {
@@ -219,6 +234,23 @@ header {
 
   }
 
+  .publication-header {
+    display: block;
+    margin: 10px 0px 0px 0px;
+    padding: 5px 0px 0px 11px;
+    font-size: 19px;
+    color: #000;
+
+    .toggle-btn {
+      display: inline-block;
+      float: right;
+      text-decoration: underline;
+      font-size: 11px;
+      color: blue;
+    }
+
+  }
+
   &.ng-scope:after {
     content: "";
     display: block;
@@ -231,11 +263,13 @@ header {
   }
 
   .pub-list {
+
     display: block;
     vertical-align: top;
     margin: 10px 0px;
     padding:0px;
     overflow: auto;
+    position: relative;
 
     li {
       margin: 0px;
@@ -258,7 +292,25 @@ header {
 
     }
 
+   /* &.open {
+      top: 0px;
+      transition-property: top;
+      transition-duration: 1s;
+      transition-timing-function: linear;
+    }
+
+    &.hide {
+      top: -50em;
+      transition-property: top;
+      transition-duration: 1s;
+      transition-timing-function: linear;
+    }*/
+
+
+
   }
+
+
 
 
 }

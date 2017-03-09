@@ -319,6 +319,10 @@ mapApp.directive('publicationsList', ['mapService', '$location', function (mapSe
 
             $scope.pubFacts = [];
 
+            $scope.isPublicationListOpen = true;
+
+            $scope.isPublicationDataOpen = true;
+
             mapService.onLoadMap(function (options) {
                 if (!this.isInit) {
                     search = new google.maps.places.Autocomplete($element[0].querySelector('.pac-input'), searchOpts);
@@ -332,6 +336,10 @@ mapApp.directive('publicationsList', ['mapService', '$location', function (mapSe
                 controller.clearSearchInput();
                 controller.selectPublication(featureIds, false);
                 mapService.selectMapFeature(publication);
+            };
+
+            $scope.togglePublications = function () {
+                $scope.isPublicationOpen = !$scope.isPublicationOpen;
             };
 
             mapService.onLoadPublications(function (publications) {
