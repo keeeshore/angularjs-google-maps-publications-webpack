@@ -63,7 +63,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 8);
+/******/ 	return __webpack_require__(__webpack_require__.s = 9);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -376,20 +376,26 @@ module.exports = [
 /* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(4);
+__webpack_require__(5);
 module.exports = angular;
 
 /***/ }),
 /* 3 */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"tooltip\">    <ul class=\"facts\">        <li ng-repeat=\"(key, value) in facts\">            <div class=\"content\">                <h4>{{key}}</h4>                <label>{{value}}</label>            </div>        </li>    </ul></div>"
+
+/***/ }),
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(6);
+var content = __webpack_require__(7);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
-var update = __webpack_require__(7)(content, {});
+var update = __webpack_require__(8)(content, {});
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -406,7 +412,7 @@ if(false) {
 }
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports) {
 
 /**
@@ -17794,7 +17800,7 @@ if(window.console){console.log('WARNING: Tried to load angular more than once.')
 bindJQuery();publishExternalAPI(angular);angular.module("ngLocale",[],["$provide",function($provide){var PLURAL_CATEGORY={ZERO:"zero",ONE:"one",TWO:"two",FEW:"few",MANY:"many",OTHER:"other"};function getDecimals(n){n=n+'';var i=n.indexOf('.');return i==-1?0:n.length-i-1;}function getVF(n,opt_precision){var v=opt_precision;if(undefined===v){v=Math.min(getDecimals(n),3);}var base=Math.pow(10,v);var f=(n*base|0)%base;return{v:v,f:f};}$provide.value("$locale",{"DATETIME_FORMATS":{"AMPMS":["AM","PM"],"DAY":["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"],"ERANAMES":["Before Christ","Anno Domini"],"ERAS":["BC","AD"],"FIRSTDAYOFWEEK":6,"MONTH":["January","February","March","April","May","June","July","August","September","October","November","December"],"SHORTDAY":["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],"SHORTMONTH":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"STANDALONEMONTH":["January","February","March","April","May","June","July","August","September","October","November","December"],"WEEKENDRANGE":[5,6],"fullDate":"EEEE, MMMM d, y","longDate":"MMMM d, y","medium":"MMM d, y h:mm:ss a","mediumDate":"MMM d, y","mediumTime":"h:mm:ss a","short":"M/d/yy h:mm a","shortDate":"M/d/yy","shortTime":"h:mm a"},"NUMBER_FORMATS":{"CURRENCY_SYM":"$","DECIMAL_SEP":".","GROUP_SEP":",","PATTERNS":[{"gSize":3,"lgSize":3,"maxFrac":3,"minFrac":0,"minInt":1,"negPre":"-","negSuf":"","posPre":"","posSuf":""},{"gSize":3,"lgSize":3,"maxFrac":2,"minFrac":2,"minInt":1,"negPre":"-\u00a4","negSuf":"","posPre":"\u00a4","posSuf":""}]},"id":"en-us","localeID":"en_US","pluralCat":function(n,opt_precision){var i=n|0;var vf=getVF(n,opt_precision);if(i==1&&vf.v==0){return PLURAL_CATEGORY.ONE;}return PLURAL_CATEGORY.OTHER;}});}]);jqLite(function(){angularInit(window.document,bootstrap);});})(window);!window.angular.$$csp().noInlineStyle&&window.angular.element(document.head).prepend('<style type="text/css">@charset "UTF-8";[ng\\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>');
 
 /***/ }),
-/* 5 */
+/* 6 */
 /***/ (function(module, exports) {
 
 /*
@@ -17847,21 +17853,21 @@ module.exports = function () {
 };
 
 /***/ }),
-/* 6 */
+/* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(5)();
+exports = module.exports = __webpack_require__(6)();
 // imports
 
 
 // module
-exports.push([module.i, "/* http://meyerweb.com/eric/tools/css/reset/\r\n   v2.0 | 20110126\r\n   License: none (public domain)\r\n*/\nhtml, body, div, span, applet, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, img, ins, kbd, q, s, samp,\nsmall, strike, strong, sub, sup, tt, var,\nb, u, i, center,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, embed,\nfigure, figcaption, footer, header, hgroup,\nmenu, nav, output, ruby, section, summary,\ntime, mark, audio, video {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-size: 100%;\n  font: inherit;\n  vertical-align: baseline; }\n\n/* HTML5 display-role reset for older browsers */\narticle, aside, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section {\n  display: block; }\n\nbody {\n  line-height: 1; }\n\nol, ul {\n  list-style: none; }\n\nblockquote, q {\n  quotes: none; }\n\nblockquote:before, blockquote:after,\nq:before, q:after {\n  content: '';\n  content: none; }\n\ntable {\n  border-collapse: collapse;\n  border-spacing: 0; }\n\n/* CUSTOM CSS START*/\nbody {\n  font-family: 'Noto Sans', 'PT Sans', 'Open Sans', 'Helvetica Neue', Arial, Helvetica, sans-serif;\n  margin: 0px;\n  padding: 0px;\n  background: url(\"/images/mosaic.png\") repeat; }\n\n.page-container {\n  margin: 0px auto;\n  width: 100%; }\n\nheader .container {\n  width: 80%;\n  margin: 0px auto; }\n\nheader .logo-container {\n  background: #3f4652;\n  padding: 10px; }\n\nheader .menu-container {\n  background: #d8d8d8;\n  font-size: 18px;\n  padding: 8px 0px; }\n  header .menu-container .insights {\n    width: 45%;\n    display: inline-block; }\n    header .menu-container .insights strong {\n      text-decoration: underline; }\n  header .menu-container .state-insight {\n    text-align: right; }\n  header .menu-container .state-btn {\n    display: inline-block;\n    padding: 5px 13px;\n    border-radius: 30px;\n    background: #FFF;\n    margin: 0px 0px 0px 5px;\n    color: #000;\n    text-decoration: none;\n    border: 1px solid #18d4ca; }\n\n.map-container {\n  overflow: auto;\n  vertical-align: top;\n  width: 100%;\n  display: inline-block;\n  position: fixed;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  top: 110px; }\n\n.map {\n  width: 70%;\n  height: 100%; }\n\n.publications {\n  width: 30%;\n  height: 97%;\n  position: relative;\n  overflow: auto;\n  float: right;\n  margin: 0px;\n  color: #6f6f6f;\n  font-size: 100%;\n  margin: 10px 10px 0px 10px;\n  background: #FFF; }\n  .publications .publications-data {\n    padding: 20px; }\n  .publications .form-control {\n    font-size: 100%;\n    margin: 0px;\n    padding-bottom: 30px;\n    border-bottom: 1px solid #dddddd; }\n    .publications .form-control label {\n      display: inline-block;\n      text-align: right; }\n    .publications .form-control input#pac-input {\n      width: 95%;\n      display: inline-block;\n      padding: 10px;\n      font-size: 18px; }\n  .publications .form-output {\n    padding: 3px 0px;\n    font-size: 18px;\n    border-bottom: 1px solid #dddddd;\n    background: #424345;\n    border-radius: 5px;\n    color: #FFF;\n    text-align: center;\n    overflow: auto; }\n    .publications .form-output .toggle-btn {\n      display: block;\n      text-align: right;\n      text-decoration: underline;\n      font-size: 11px;\n      margin: 0px 5px 0px 5px;\n      color: white; }\n    .publications .form-output .content {\n      margin: 10px; }\n    .publications .form-output .search-place {\n      padding-bottom: 10px;\n      border-bottom: 1px solid #CCC;\n      margin-top: 16px; }\n    .publications .form-output h3 {\n      font-size: 20px;\n      line-height: 1.4em; }\n    .publications .form-output .customer-reach {\n      font-size: 15px;\n      font-weight: normal;\n      color: #CCC; }\n      .publications .form-output .customer-reach span {\n        font-weight: bold; }\n    .publications .form-output ul.facts {\n      border-top: 1px solid #CCC;\n      border-bottom: 1px solid #CCC;\n      margin: 0px;\n      padding: 0px;\n      width: 100%;\n      text-align: center;\n      vertical-align: top; }\n      .publications .form-output ul.facts li {\n        display: inline-block;\n        min-width: 49%;\n        margin: 0px;\n        padding: 0px;\n        text-align: center; }\n        .publications .form-output ul.facts li h4 {\n          font-size: 16px;\n          display: block;\n          margin: 5px 0px; }\n        .publications .form-output ul.facts li label {\n          font-weight: 500; }\n        .publications .form-output ul.facts li:nth-child(odd) {\n          border-right: 1px solid #CCC; }\n  .publications .publication-header {\n    display: block;\n    margin: 10px 0px 0px 0px;\n    padding: 5px 0px 0px 11px;\n    font-size: 19px;\n    color: #000; }\n    .publications .publication-header .toggle-btn {\n      display: inline-block;\n      float: right;\n      text-decoration: underline;\n      font-size: 11px;\n      color: blue; }\n  .publications.ng-scope:after {\n    content: \"\";\n    display: block;\n    position: fixed;\n    bottom: 0;\n    left: 0;\n    width: 100%;\n    height: 5%;\n    background: linear-gradient(transparent, #ddd) left repeat; }\n  .publications .pub-list {\n    display: block;\n    vertical-align: top;\n    margin: 10px 0px;\n    padding: 0px;\n    overflow: auto;\n    position: relative;\n    /* &.open {\r\n      top: 0px;\r\n      transition-property: top;\r\n      transition-duration: 1s;\r\n      transition-timing-function: linear;\r\n    }\r\n\r\n    &.hide {\r\n      top: -50em;\r\n      transition-property: top;\r\n      transition-duration: 1s;\r\n      transition-timing-function: linear;\r\n    }*/ }\n    .publications .pub-list li {\n      margin: 0px;\n      padding: 0px;\n      list-style: none; }\n      .publications .pub-list li a {\n        display: block;\n        margin: 0px;\n        padding: 5px 0px 5px 10px;\n        border-bottom: 1px solid #CCC;\n        text-decoration: none;\n        color: #6f6f6f; }\n      .publications .pub-list li.active a {\n        background: #CC0000;\n        color: #FFF; }\n\n.disclaimer {\n  position: relative;\n  z-index: 100;\n  background: white;\n  width: auto;\n  float: left;\n  padding: 10px;\n  font-size: 12px;\n  margin: 7px;\n  opacity: 0.7; }\n", ""]);
+exports.push([module.i, "/* http://meyerweb.com/eric/tools/css/reset/\r\n   v2.0 | 20110126\r\n   License: none (public domain)\r\n*/\nhtml, body, div, span, applet, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, img, ins, kbd, q, s, samp,\nsmall, strike, strong, sub, sup, tt, var,\nb, u, i, center,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, embed,\nfigure, figcaption, footer, header, hgroup,\nmenu, nav, output, ruby, section, summary,\ntime, mark, audio, video {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-size: 100%;\n  font: inherit;\n  vertical-align: baseline; }\n\n/* HTML5 display-role reset for older browsers */\narticle, aside, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section {\n  display: block; }\n\nbody {\n  line-height: 1; }\n\nol, ul {\n  list-style: none; }\n\nblockquote, q {\n  quotes: none; }\n\nblockquote:before, blockquote:after,\nq:before, q:after {\n  content: '';\n  content: none; }\n\ntable {\n  border-collapse: collapse;\n  border-spacing: 0; }\n\n/* CUSTOM CSS START*/\nbody {\n  font-family: 'Noto Sans', 'PT Sans', 'Open Sans', 'Helvetica Neue', Arial, Helvetica, sans-serif;\n  margin: 0px;\n  padding: 0px;\n  background: url(\"/images/mosaic.png\") repeat; }\n\n.page-container {\n  margin: 0px auto;\n  width: 100%; }\n\nheader .container {\n  width: 80%;\n  margin: 0px auto; }\n\nheader .logo-container {\n  background: #3f4652;\n  padding: 10px; }\n\nheader .menu-container {\n  background: #d8d8d8;\n  font-size: 18px;\n  padding: 8px 0px; }\n  header .menu-container .insights {\n    width: 45%;\n    display: inline-block; }\n    header .menu-container .insights strong {\n      text-decoration: underline; }\n  header .menu-container .state-insight {\n    text-align: right; }\n  header .menu-container .state-btn {\n    display: inline-block;\n    padding: 5px 13px;\n    border-radius: 30px;\n    background: #FFF;\n    margin: 0px 0px 0px 5px;\n    color: #000;\n    text-decoration: none;\n    border: 1px solid #18d4ca; }\n\n.map-container {\n  overflow: auto;\n  vertical-align: top;\n  width: 100%;\n  display: inline-block;\n  position: fixed;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  top: 110px; }\n\n.map {\n  width: 70%;\n  height: 100%; }\n  .map .tooltip {\n    text-align: center; }\n    .map .tooltip ul.facts {\n      margin: 0px;\n      padding: 0px;\n      width: 100%;\n      text-align: center;\n      vertical-align: top; }\n      .map .tooltip ul.facts li {\n        display: inline-block;\n        margin: 0px;\n        padding: 10px;\n        text-align: center; }\n        .map .tooltip ul.facts li h4 {\n          font-size: 15px;\n          display: block;\n          margin: 5px 0px; }\n        .map .tooltip ul.facts li label {\n          font-weight: 500; }\n        .map .tooltip ul.facts li:nth-child(odd) {\n          border-right: 1px solid #CCC; }\n\n.publications {\n  width: 30%;\n  height: 97%;\n  position: relative;\n  overflow: auto;\n  float: right;\n  margin: 0px;\n  color: #6f6f6f;\n  font-size: 100%;\n  margin: 10px 10px 0px 10px;\n  background: #FFF; }\n  .publications .publications-data {\n    padding: 20px; }\n  .publications .form-control {\n    font-size: 100%;\n    margin: 0px;\n    padding-bottom: 30px;\n    border-bottom: 1px solid #dddddd; }\n    .publications .form-control label {\n      display: inline-block;\n      text-align: right; }\n    .publications .form-control input#pac-input {\n      width: 95%;\n      display: inline-block;\n      padding: 10px;\n      font-size: 18px; }\n  .publications .form-output {\n    padding: 3px 0px;\n    font-size: 18px;\n    border-bottom: 1px solid #dddddd;\n    background: #424345;\n    border-radius: 5px;\n    color: #FFF;\n    text-align: center;\n    overflow: auto; }\n    .publications .form-output .toggle-btn {\n      display: block;\n      text-align: right;\n      text-decoration: underline;\n      font-size: 11px;\n      margin: 0px 5px 0px 5px;\n      color: white; }\n    .publications .form-output .content {\n      margin: 10px; }\n    .publications .form-output .search-place {\n      padding-bottom: 10px;\n      border-bottom: 1px solid #CCC;\n      margin-top: 16px; }\n    .publications .form-output h3 {\n      font-size: 20px;\n      line-height: 1.4em; }\n    .publications .form-output .customer-reach {\n      font-size: 15px;\n      font-weight: normal;\n      color: #CCC; }\n      .publications .form-output .customer-reach span {\n        font-weight: bold; }\n    .publications .form-output ul.facts {\n      border-top: 1px solid #CCC;\n      border-bottom: 1px solid #CCC;\n      margin: 0px;\n      padding: 0px;\n      width: 100%;\n      text-align: center;\n      vertical-align: top; }\n      .publications .form-output ul.facts li {\n        display: inline-block;\n        min-width: 49%;\n        margin: 0px;\n        padding: 0px;\n        text-align: center; }\n        .publications .form-output ul.facts li h4 {\n          font-size: 16px;\n          display: block;\n          margin: 5px 0px; }\n        .publications .form-output ul.facts li label {\n          font-weight: 500; }\n        .publications .form-output ul.facts li:nth-child(odd) {\n          border-right: 1px solid #CCC; }\n  .publications .publication-header {\n    display: block;\n    margin: 10px 0px 0px 0px;\n    padding: 5px 0px 0px 11px;\n    font-size: 19px;\n    color: #000; }\n    .publications .publication-header .toggle-btn {\n      display: inline-block;\n      float: right;\n      text-decoration: underline;\n      font-size: 11px;\n      color: blue; }\n  .publications.ng-scope:after {\n    content: \"\";\n    display: block;\n    position: fixed;\n    bottom: 0;\n    left: 0;\n    width: 100%;\n    height: 5%;\n    background: linear-gradient(transparent, #ddd) left repeat; }\n  .publications .pub-list {\n    display: block;\n    vertical-align: top;\n    margin: 10px 0px;\n    padding: 0px;\n    overflow: auto;\n    position: relative;\n    /* &.open {\r\n      top: 0px;\r\n      transition-property: top;\r\n      transition-duration: 1s;\r\n      transition-timing-function: linear;\r\n    }\r\n\r\n    &.hide {\r\n      top: -50em;\r\n      transition-property: top;\r\n      transition-duration: 1s;\r\n      transition-timing-function: linear;\r\n    }*/ }\n    .publications .pub-list li {\n      margin: 0px;\n      padding: 0px;\n      list-style: none; }\n      .publications .pub-list li a {\n        display: block;\n        margin: 0px;\n        padding: 5px 0px 5px 10px;\n        border-bottom: 1px solid #CCC;\n        text-decoration: none;\n        color: #6f6f6f; }\n      .publications .pub-list li.active a {\n        background: #CC0000;\n        color: #FFF; }\n\n.disclaimer {\n  position: relative;\n  z-index: 100;\n  background: white;\n  width: auto;\n  float: left;\n  padding: 10px;\n  font-size: 12px;\n  margin: 7px;\n  opacity: 0.7; }\n", ""]);
 
 // exports
 
 
 /***/ }),
-/* 7 */
+/* 8 */
 /***/ (function(module, exports) {
 
 /*
@@ -18113,7 +18119,7 @@ function updateLink(linkElement, obj) {
 
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
@@ -18121,9 +18127,12 @@ function updateLink(linkElement, obj) {
  * Created by balank on 23/02/2017.
  */
 var angular = __webpack_require__(2);
-var css = __webpack_require__(3);
+var css = __webpack_require__(4);
 var styles = __webpack_require__(1);
 var mapsConfig = __webpack_require__(0);
+var toolTipHtml = __webpack_require__(3);
+
+console.log('toolTipHtml =', toolTipHtml);
 
 mapsConfig.NSW.styles = styles;
 mapsConfig.QLD.styles = styles;
@@ -18137,7 +18146,7 @@ mapApp.controller('MapController', ['$rootScope', '$scope', '$timeout', '$locati
     $scope.activeMapConfig = null;
 
     $scope.$on('$locationChangeSuccess', function (location) {
-        console.log('$locationChangeSuccess-------------', $location.path());
+        console.log('$locationChangeSuccess', $location.path());
         var state = $location.search().state || 'nsw';
         if (mapsConfig[state.toUpperCase()]) {
             $scope.activeMapConfig = mapsConfig[state.toUpperCase()];
@@ -18271,13 +18280,15 @@ mapApp.component('mapComponent', {
 
 });
 
-mapApp.directive('mapArea', ['mapService', function (mapService) {
+mapApp.directive('mapArea', ['mapService', '$compile', function (mapService, $compile) {
 
     var map;
 
     return {
 
         restrict: 'AEC',
+
+        scope: {},
 
         transclude: true,
 
@@ -18286,10 +18297,15 @@ mapApp.directive('mapArea', ['mapService', function (mapService) {
         },
 
         link: function ($scope, $element, attr, controller) {
-
             var infoWindow, infoWindowEvt, mapClickEvt;
 
+            $scope.activeMapConfig = {};
+
+            $scope.facts = {};
+
             mapService.onLoadMap(function (options) {
+
+                $scope.activeMapConfig = options;
 
                 map = controller.renderMap(options, $element[0].querySelector('.geo-map-data'));
 
@@ -18307,9 +18323,13 @@ mapApp.directive('mapArea', ['mapService', function (mapService) {
                 });
 
                 infoWindowEvt = map.data.addListener('mouseover', function (event) {
-                    var fact;
-                    fact = mapService.getPublicationFactById(event.feature.getId());
-                    infoWindow.setContent('<strong>Readership:</strong>' + fact.Readership + ', <strong> Circulation:</strong>' + fact.Circulation);
+                    $scope.facts = mapService.getPublicationFactById(event.feature.getId());
+                    var template = angular.element(toolTipHtml);
+                    var linkFn = $compile(template);
+                    var element = linkFn($scope);
+                    infoWindow.setContent(element[0]);
+                    $scope.$apply();
+
                     infoWindow.setPosition({
                         lat: event.feature.getProperty('centroid')[1],
                         lng: event.feature.getProperty('centroid')[0]
@@ -18503,11 +18523,7 @@ mapApp.directive('publicationsList', ['mapService', '$location', function (mapSe
             });
 
             mapService.onGetPublicationFactById(function (featureId) {
-                /*var pubs = $scope.pubFacts.filter(function (factObj) {
-                    return featureIds.indexOf(factObj.id) != -1;
-                });*/
                 var pubs = controller.getPublicationFact(featureId);
-                console.log('selected pubs = ', pubs);
                 return pubs;
             });
         },

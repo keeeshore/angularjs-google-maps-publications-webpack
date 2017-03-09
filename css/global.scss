@@ -118,6 +118,37 @@ header {
 .map {
     width: 70%;
     height: 100%;
+
+  .tooltip {
+    text-align: center;
+
+    ul.facts {
+      margin: 0px;
+      padding: 0px;
+      width: 100%;
+      text-align: center;
+      vertical-align: top;
+
+      li {
+        display: inline-block;
+        margin: 0px;
+        padding: 10px;
+        text-align: center;
+        h4 {
+          font-size: 15px;
+          display: block;
+          margin: 5px 0px;
+        }
+        label {
+          font-weight: 500;
+        }
+        &:nth-child(odd) {
+          border-right: 1px solid #CCC;
+        }
+      }
+
+    }
+  }
 }
 
 .publications {
@@ -309,8 +340,6 @@ header {
 
 
   }
-
-
 
 
 }

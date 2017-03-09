@@ -29,6 +29,10 @@ module.exports = {
                 use: ['babel-loader']
             },
             {
+                test: /\.html$/,
+                use: [ { loader: 'string-loader'}]
+            },
+            {
                 test: /\.scss$/,
                 use: [{
                     loader: 'style-loader' // creates style nodes from JS strings

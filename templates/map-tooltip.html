@@ -1,3 +1,10 @@
 <div class="tooltip">
-    <h1>Test tooltip comes here...{{activeMapConfig}}</h1>
+    <ul class="facts">
+        <li ng-repeat="(key, value) in facts">
+            <div class="content">
+                <h4>{{key}}</h4>
+                <label>{{value}}</label>
+            </div>
+        </li>
+    </ul>
 </div>

@@ -6,6 +6,9 @@ var angular = require('angular');
 var css = require('../css/global.scss');
 var styles = require('../data/map-styles.json');
 var mapsConfig = require('../data/map-config.json');
+var toolTipHtml = require('../templates/map-tooltip.html');
+
+console.log('toolTipHtml =', toolTipHtml);
 
 mapsConfig.NSW.styles = styles;
 mapsConfig.QLD.styles = styles;
@@ -19,7 +22,7 @@ mapApp.controller('MapController', ['$rootScope', '$scope', '$timeout', '$locati
     $scope.activeMapConfig = null;
 
     $scope.$on('$locationChangeSuccess', function (location) {
-        console.log('$locationChangeSuccess-------------', $location.path());
+        console.log('$locationChangeSuccess', $location.path());
         var state = $location.search().state || 'nsw';
         if (mapsConfig[state.toUpperCase()]) {
             $scope.activeMapConfig = mapsConfig[state.toUpperCase()];
@@ -157,13 +160,15 @@ mapApp.component('mapComponent', {
 
 });
 
-mapApp.directive('mapArea', ['mapService', function (mapService) {
+mapApp.directive('mapArea', ['mapService', '$compile',  function (mapService, $compile) {
 
     var map;
 
     return {
 
         restrict: 'AEC',
+
+        scope: {},
 
         transclude: true,
 
@@ -172,12 +177,17 @@ mapApp.directive('mapArea', ['mapService', function (mapService) {
         },
 
         link: function ($scope, $element, attr, controller) {
-
             var infoWindow,
                 infoWindowEvt,
                 mapClickEvt;
 
+            $scope.activeMapConfig = {};
+
+            $scope.facts = {};
+
             mapService.onLoadMap(function (options) {
+
+                $scope.activeMapConfig = options;
 
                 map = controller.renderMap(options, $element[0].querySelector('.geo-map-data'));
 
@@ -195,9 +205,13 @@ mapApp.directive('mapArea', ['mapService', function (mapService) {
                 });
 
                 infoWindowEvt = map.data.addListener('mouseover', function(event) {
-                    var fact;
-                    fact =  mapService.getPublicationFactById(event.feature.getId());
-                    infoWindow.setContent('<strong>Readership:</strong>'+ fact.Readership + ', <strong> Circulation:</strong>' + fact.Circulation);
+                    $scope.facts =  mapService.getPublicationFactById(event.feature.getId());
+                    var template = angular.element(toolTipHtml);
+                    var linkFn = $compile(template);
+                    var element = linkFn($scope);
+                    infoWindow.setContent(element[0]);
+                    $scope.$apply();
+
                     infoWindow.setPosition({
                         lat: event.feature.getProperty('centroid')[1],
                         lng: event.feature.getProperty('centroid')[0]
@@ -220,6 +234,7 @@ mapApp.directive('mapArea', ['mapService', function (mapService) {
             mapService.onSearchMapLocation(function (place) {
                 controller.setMapSearchLocation(place);
             });
+
         },
 
         controller: ['$scope', '$http', function ($scope, $http) {
@@ -393,11 +408,7 @@ mapApp.directive('publicationsList', ['mapService', '$location', function (mapSe
             });
 
             mapService.onGetPublicationFactById(function (featureId) {
-                /*var pubs = $scope.pubFacts.filter(function (factObj) {
-                    return featureIds.indexOf(factObj.id) != -1;
-                });*/
                 var pubs = controller.getPublicationFact(featureId);
-                console.log('selected pubs = ', pubs);
                 return pubs;
             });
         },
