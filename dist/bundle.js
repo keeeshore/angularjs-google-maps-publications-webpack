@@ -18273,7 +18273,7 @@ mapApp.component('mapComponent', {
 
 mapApp.directive('mapArea', ['mapService', function (mapService) {
 
-    var map, infoWindow;
+    var map;
 
     return {
 
@@ -18287,14 +18287,17 @@ mapApp.directive('mapArea', ['mapService', function (mapService) {
 
         link: function ($scope, $element, attr, controller) {
 
+            var infoWindow, infoWindowEvt, mapClickEvt;
+
             mapService.onLoadMap(function (options) {
 
                 map = controller.renderMap(options, $element[0].querySelector('.geo-map-data'));
+
                 infoWindow = new google.maps.InfoWindow();
 
                 controller.loadGeoJson(map, options.geoJson);
 
-                map.data.addListener('click', function (event) {
+                mapClickEvt = map.data.addListener('click', function (event) {
                     var clearSearchInput = true;
                     var featureId = event.feature.getId();
                     map.data.revertStyle();
@@ -18303,8 +18306,9 @@ mapApp.directive('mapArea', ['mapService', function (mapService) {
                     mapService.selectMapPublication(featureId, clearSearchInput);
                 });
 
-                map.data.addListener('mouseover', function (event) {
-                    var fact = mapService.getPublicationFactById(event.feature.getId());
+                infoWindowEvt = map.data.addListener('mouseover', function (event) {
+                    var fact;
+                    fact = mapService.getPublicationFactById(event.feature.getId());
                     infoWindow.setContent('<strong>Readership:</strong>' + fact.Readership + ', <strong> Circulation:</strong>' + fact.Circulation);
                     infoWindow.setPosition({
                         lat: event.feature.getProperty('centroid')[1],
@@ -18312,6 +18316,10 @@ mapApp.directive('mapArea', ['mapService', function (mapService) {
                     });
                     infoWindow.open(map);
                 }.bind(this));
+
+                google.maps.event.addListener(infoWindow, 'closeclick', function (event) {
+                    google.maps.event.removeListener(infoWindowEvt);
+                });
             }.bind(this));
 
             mapService.onSelectMapFeature(function (feature) {
