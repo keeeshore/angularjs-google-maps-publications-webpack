@@ -328,7 +328,9 @@ mapApp.directive('publicationsList', ['mapService', '$location', function (mapSe
             });
 
             $scope.onClickPublicationLink = function (publication) {
-                controller.selectPublication([publication.id], false);
+                var featureIds = [publication.id];
+                controller.clearSearchInput();
+                controller.selectPublication(featureIds, false);
                 mapService.selectMapFeature(publication);
             };
 
@@ -340,14 +342,13 @@ mapApp.directive('publicationsList', ['mapService', '$location', function (mapSe
 
             mapService.onSelectMapPublication(function (featureId, clearSearchInput) {
                 if (clearSearchInput) {
-                    $scope.searchedPlace = null;
-                    $element[0].querySelector('.pac-input').value = '';
+                    controller.clearSearchInput();
                 }
                 controller.selectPublication(featureId, true);
             });
         },
 
-        controller: ['$scope', '$timeout', '$http', '$q', function ($scope, $timeout, $http, $q) {
+        controller: ['$scope', '$timeout', '$http', '$q', '$element', function ($scope, $timeout, $http, $q, $element) {
 
             return {
 
@@ -413,12 +414,17 @@ mapApp.directive('publicationsList', ['mapService', '$location', function (mapSe
                     return $q(function(resolve, reject) {
                         $http.get(factUrl).then(function (response) {
                             $scope.pubFacts = response.data;
-                            resolve();
+                            resolve(response.data);
                         }, function (err) {
                             console.log('[ERROR] No data loaded: ', err);
                             reject(err);
                         });
                     });
+                },
+
+                clearSearchInput: function () {
+                    $scope.searchedPlace = null;
+                    $element[0].querySelector('.pac-input').value = '';
                 },
 
                 getPublicationFact: function (featureId) {
