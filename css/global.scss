@@ -61,6 +61,19 @@ body {
     width: 100%;
 }
 
+.error {
+  display: block;
+  width: 80%;
+  position: fixed;
+  text-align: center;
+  top: 10px;
+  color: red;
+  font-size: 19px;
+  z-index: 999;
+  background: #FFF;
+  padding: 5px;
+}
+
 header {
 
   .container {
@@ -115,10 +128,21 @@ header {
     top: 110px;
 }
 
-.map {
-    width: 70%;
-    height: 100%;
+.map,
+.metro {
+  width: 70%;
+  height: 100%;
 
+  &.hide {
+    display: none;
+  }
+
+  &.open {
+  }
+  
+}
+
+.map {
   .tooltip {
     text-align: center;
 
@@ -151,6 +175,10 @@ header {
   }
 }
 
+.metro {
+
+}
+
 .publications {
     width: 30%;
     height: 97%;
@@ -162,7 +190,6 @@ header {
     font-size: 100%;
     margin: 10px 10px 0px 10px;
     background: #FFF;
-
 
   .publications-data {
     padding: 20px;

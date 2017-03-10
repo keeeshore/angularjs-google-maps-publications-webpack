@@ -8,28 +8,54 @@ var styles = require('../data/map-styles.json');
 var mapsConfig = require('../data/map-config.json');
 var toolTipHtml = require('../templates/map-tooltip.html');
 
-console.log('toolTipHtml =', toolTipHtml);
-
 mapsConfig.NSW.styles = styles;
 mapsConfig.QLD.styles = styles;
-mapsConfig.VIC.styles = styles;
-mapsConfig.SA.styles = styles;
 
 var mapApp = angular.module('mapApp', []);
 
 mapApp.controller('MapController', ['$rootScope', '$scope', '$timeout', '$location', function ($rootScope, $scope, $timeout, $location) {
 
+    console.log('MapController::$location.path : ' , $location.path());
+
     $scope.activeMapConfig = null;
 
+    $scope.mapError = null;
+
     $scope.$on('$locationChangeSuccess', function (location) {
-        console.log('$locationChangeSuccess', $location.path());
-        var state = $location.search().state || 'nsw';
+        console.log('MapController::$locationChangeSuccess : ' , $location.path());
+        var url = $location.path().split('/');
+        var state = url[1] || '';
+        var area = url[2] || 'local';
+
         if (mapsConfig[state.toUpperCase()]) {
+            console.log('state = ', state, 'area = ', area);
+            $scope.mapError = null;
             $scope.activeMapConfig = mapsConfig[state.toUpperCase()];
+            $scope.activeMapConfig.activeArea = area.toUpperCase();
+            console.log('MapController::set activeArea to', area);
         } else {
-            $scope.activeMapConfig = mapsConfig.NSW;
+            $scope.mapError = 'No state config found';
         }
+
     });
+
+    return {
+
+        showMetro: function (config) {
+            console.log('showMetro clicked');
+            var urlPath = config.state + '/' + config.metro.code;
+            $scope.activeMapConfig = null; //To trigger the map component change fn. weird!!
+            $location.path(urlPath);
+        },
+
+        showLocal: function (config) {
+            console.log('showLocal clicked');
+            var urlPath = config.state + '/local';
+            $scope.activeMapConfig = null; //To trigger the map component change fn. weird!!
+            $location.path(urlPath);
+        }
+
+    }
 
 }]);
 
@@ -40,7 +66,7 @@ mapApp.factory('mapService', ['$timeout', function ($timeout) {
         selectMapCallbacks = [],
         selectPubCallbacks = [],
         searchMapCallbacks = [],
-        pubFactCallbacks = [],
+        getPubFactCb,
         defaults = {
             zoom: 10,
             center: { lat: -27.470125, lng: 153.021072 },
@@ -115,17 +141,12 @@ mapApp.factory('mapService', ['$timeout', function ($timeout) {
         },
 
         getPublicationFactById: function (featureId) {
-            var fact;
-            pubFactCallbacks.forEach(function(cb) {
-                fact = cb(featureId);
-            }.bind(this));
-            return fact;
+            return getPubFactCb(featureId);
         },
 
         onGetPublicationFactById: function (cb) {
-            pubFactCallbacks.push(cb);
+            getPubFactCb = cb;
         }
-
 
     }
 
@@ -136,7 +157,7 @@ mapApp.component('mapComponent', {
     transclude: true,
 
     templateUrl: function ($element, $attrs) {
-        return $attrs.templateUrl || 'templates/map-container.html';
+        return $attrs.templateUrl || 'templates/map-component.html';
     },
 
     bindings: {
@@ -146,15 +167,21 @@ mapApp.component('mapComponent', {
     controller: ['$scope', 'mapService', function ($scope, mapService) {
 
         this.$postLink = function () {
-            this.config = angular.merge(mapService.defaults, this.config);
-            mapService.loadMap(this.config);
+            console.log('mapComponent::$postLink...');
+            $scope.config = angular.merge(mapService.defaults, this.config);
+            mapService.loadMap($scope.config);
         };
 
         this.$onChanges =  function (changes) {
-            console.log('mapComponent has changes...reload map');
-            this.config = angular.merge(mapService.defaults, this.config);
-            mapService.loadMap(this.config);
+            console.log('mapComponent::$onChanges...reload map>>activeArea=', this.config.activeArea);
+            $scope.config = angular.merge(mapService.defaults, this.config);
+            mapService.loadMap($scope.config);
         };
+
+        $scope.$watch('config.activeArea', function (activeArea) {
+            console.log('mapComponent:: activeArea changes in config noticed.....', activeArea);
+        });
+
 
     }]
 
@@ -173,7 +200,7 @@ mapApp.directive('mapArea', ['mapService', '$compile',  function (mapService, $c
         transclude: true,
 
         templateUrl: function ($element, $attrs) {
-            return $attrs.templateUrl || 'templates/map.html';
+            return $attrs.templateUrl || 'templates/map-area.html';
         },
 
         link: function ($scope, $element, attr, controller) {
@@ -185,20 +212,37 @@ mapApp.directive('mapArea', ['mapService', '$compile',  function (mapService, $c
 
             $scope.facts = {};
 
-            mapService.onLoadMap(function (options) {
+            $scope.$watch('activeMapConfig.activeArea', function (activeArea) {
+               console.log('mapArea::$watch--------------------------activeArea is ', activeArea);
+                /*if (activeArea === 'LOCAL') {
+                    $element.removeClass('hide').addClass('open');
+                } else {
+                    $element.removeClass('open').addClass('hide');
+                }*/
+            });
 
-                $scope.activeMapConfig = options;
+            mapService.onLoadMap(function (config) {
+                console.log('mapArea: on Load map');
 
-                map = controller.renderMap(options, $element[0].querySelector('.geo-map-data'));
+                $scope.activeMapConfig = config;
+
+                if (config.activeArea === 'LOCAL') {
+                    $element.removeClass('hide').addClass('open');
+                } else {
+                    $element.removeClass('open').addClass('hide');
+                }
+
+                map = controller.renderMap(config, $element[0].querySelector('.geo-map-data'));
 
                 infoWindow = new google.maps.InfoWindow();
 
-                controller.loadGeoJson(map, options.geoJson);
+                controller.loadGeoJson(map, config.geoJson);
 
                 mapClickEvt = map.data.addListener('click', function(event) {
                     var clearSearchInput = true;
                     var featureId = event.feature.getId();
                     map.data.revertStyle();
+                    infoWindow.close();
                     controller.selectMapFeature(event.feature);
                     controller.selectClosestMapFeatures(featureId);
                     mapService.selectMapPublication(featureId, clearSearchInput);
@@ -347,7 +391,7 @@ mapApp.directive('mapArea', ['mapService', '$compile',  function (mapService, $c
     }
 }]);
 
-mapApp.directive('publicationsList', ['mapService', '$location', function (mapService, $location, $timeout) {
+mapApp.directive('publicationsList', ['mapService', '$timeout', '$location', function (mapService, $timeout, $location) {
 
     return {
 
@@ -375,7 +419,8 @@ mapApp.directive('publicationsList', ['mapService', '$location', function (mapSe
 
             $scope.isPublicationDataOpen = true;
 
-            mapService.onLoadMap(function (options) {
+            mapService.onLoadMap(function (config) {
+                console.log('publicationsList: on Load map');
                 if (!this.isInit) {
                     search = new google.maps.places.Autocomplete($element[0].querySelector('.pac-input'), searchOpts);
                     google.maps.event.addListener(search, 'place_changed', controller.searchMap.bind(this, search));
@@ -413,7 +458,7 @@ mapApp.directive('publicationsList', ['mapService', '$location', function (mapSe
             });
         },
 
-        controller: ['$scope', '$timeout', '$http', '$q', '$element', function ($scope, $timeout, $http, $q, $element) {
+        controller: ['$scope', '$timeout', '$http', '$q', '$element',  function ($scope, $timeout, $http, $q, $element) {
 
             return {
 
@@ -433,9 +478,9 @@ mapApp.directive('publicationsList', ['mapService', '$location', function (mapSe
                     if (state.length > 0 && state[0].short_name !== $scope.activeMapConfig.state) {
                         //TODO pass search url?
                         console.log('changing location search -------------- to ', state[0].short_name);
-                        $location.search('state', state[0].short_name);
+                        $location.url(state[0].short_name + '/local');
                         $scope.isNewStateSearch = true;
-                        $scope.$apply(); //TODO why this again?
+                        $scope.$apply();
                     } else {
                         $scope.isNewStateSearch = false;
                     }
@@ -505,6 +550,46 @@ mapApp.directive('publicationsList', ['mapService', '$location', function (mapSe
 
         }]
 
+    }
+
+}]);
+
+mapApp.directive('metroArea', ['mapService', '$location', function (mapService, $location) {
+
+    return {
+        restrict: 'AEC',
+
+        transclude: true,
+
+        scope: {},
+
+        templateUrl: function ($element, $attrs) {
+            return $attrs.templateUrl || 'templates/metro-area.html';
+        },
+
+        link: function ($scope, $element, attr, controller) {
+            console.log('metroArea:linkFn--------------------');
+
+            $scope.activeMapConfig = {};
+
+
+            mapService.onLoadMap(function (config) {
+                console.log('metroArea: on Load map');
+                $scope.activeMapConfig = config;
+
+                if (config.activeArea === 'LOCAL') {
+                    $element.removeClass('open').addClass('hide');
+                } else {
+                    $element.removeClass('hide').addClass('open');
+                }
+
+            }.bind(this));
+
+        },
+
+        controller: ['$scope', function ($scope) {
+            console.log('metroArea:controller called...');
+        }]
     }
 
 }]);

@@ -4,7 +4,7 @@
 	"geoJson": "data/nsw.json",
 	"insights": "Sydney Local Community Newspaper",
 	"center": { "lat": -33.8899191578029, "lng": 151.20217386753  },
-	"statePublication": "The Daily Telegraph",
+	"metro": {"name": "The Daily Telegraph", "code": "DT" },
 	"publicationsMapping": [
 	  {
 		"id": "Blacktown Advocate",
@@ -93,20 +93,6 @@
 	"geoJson": "data/qld.json",
 	"insights": "Brisbane Local Community Newspaper",
 	"center": { "lat": -27.470125, "lng": 153.021072 },
-	"statePublication": "The Courier Mail"
-  },
-  "SA": {
-	"state": "SA",
-	"geoJson": "",
-	"insights": "",
-	"center": { "lat": 0, "lng": 0 },
-	"statePublication": "The Advertiser"
-  },
-  "VIC": {
-	"state": "VIC",
-	"geoJson": "",
-	"insights": "",
-	"center": { "lat": 0, "lng": 0 },
-	"statePublication": "The Herald Sun"
+	"metro": {"name": "The Courier Mail", "code": "CM" }
   }
 }
