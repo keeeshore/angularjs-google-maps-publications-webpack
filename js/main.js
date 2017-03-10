@@ -25,7 +25,7 @@ mapApp.controller('MapController', ['$rootScope', '$scope', '$timeout', '$locati
         console.log('MapController::$locationChangeSuccess : ' , $location.path());
         var url = $location.path().split('/');
         var state = url[1] || '';
-        var area = url[2] || 'local';
+        var area = url[2] || 'LOCAL';
 
         if (mapsConfig[state.toUpperCase()]) {
             console.log('state = ', state, 'area = ', area);
@@ -44,14 +44,12 @@ mapApp.controller('MapController', ['$rootScope', '$scope', '$timeout', '$locati
         showMetro: function (config) {
             console.log('showMetro clicked');
             var urlPath = config.state + '/' + config.metro.code;
-            $scope.activeMapConfig = null; //To trigger the map component change fn. weird!!
             $location.path(urlPath);
         },
 
         showLocal: function (config) {
             console.log('showLocal clicked');
             var urlPath = config.state + '/local';
-            $scope.activeMapConfig = null; //To trigger the map component change fn. weird!!
             $location.path(urlPath);
         }
 
@@ -166,22 +164,26 @@ mapApp.component('mapComponent', {
 
     controller: ['$scope', 'mapService', function ($scope, mapService) {
 
+        var initConfig = null;
+
         this.$postLink = function () {
             console.log('mapComponent::$postLink...');
             $scope.config = angular.merge(mapService.defaults, this.config);
             mapService.loadMap($scope.config);
         };
 
-        this.$onChanges =  function (changes) {
-            console.log('mapComponent::$onChanges...reload map>>activeArea=', this.config.activeArea);
-            $scope.config = angular.merge(mapService.defaults, this.config);
-            mapService.loadMap($scope.config);
+        this.$doCheck =  function (changes) {
+            console.log('mapComponent::$doCheck...-----', this.config.activeArea);
+            if (!initConfig) {
+                initConfig = angular.copy(this.config);
+            }
+            if (initConfig.state !== this.config.state ||initConfig.activeArea !== this.config.activeArea) {
+                console.log('mapComponent::$doCheck...----------------CHANGED', initConfig.state, '===', this.config.state);
+                initConfig = angular.copy(this.config);
+                $scope.config = angular.merge(mapService.defaults, this.config);
+                mapService.loadMap($scope.config);
+            }
         };
-
-        $scope.$watch('config.activeArea', function (activeArea) {
-            console.log('mapComponent:: activeArea changes in config noticed.....', activeArea);
-        });
-
 
     }]
 
@@ -226,7 +228,7 @@ mapApp.directive('mapArea', ['mapService', '$compile',  function (mapService, $c
 
                 $scope.activeMapConfig = config;
 
-                if (config.activeArea === 'LOCAL') {
+                if (config.activeArea.toUpperCase() === 'LOCAL') {
                     $element.removeClass('hide').addClass('open');
                 } else {
                     $element.removeClass('open').addClass('hide');
@@ -572,12 +574,11 @@ mapApp.directive('metroArea', ['mapService', '$location', function (mapService, 
 
             $scope.activeMapConfig = {};
 
-
             mapService.onLoadMap(function (config) {
                 console.log('metroArea: on Load map');
                 $scope.activeMapConfig = config;
 
-                if (config.activeArea === 'LOCAL') {
+                if (config.activeArea.toUpperCase() === 'LOCAL') {
                     $element.removeClass('open').addClass('hide');
                 } else {
                     $element.removeClass('hide').addClass('open');
