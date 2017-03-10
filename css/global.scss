@@ -130,7 +130,7 @@ header {
 
 .map,
 .metro {
-  width: 70%;
+  width: 69%;
   height: 100%;
 
   &.hide {
@@ -138,7 +138,6 @@ header {
   }
 
   &.open {
-
   }
 
 }
@@ -177,7 +176,11 @@ header {
 }
 
 .metro {
-
+  .metro-container {
+    margin-top: 15%;
+    font-size: 19px;
+    text-align: center;
+  }
 }
 
 .publications {
