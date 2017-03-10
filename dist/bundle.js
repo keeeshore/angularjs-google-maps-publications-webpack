@@ -79,10 +79,16 @@ module.exports = {
 			"lat": -33.8899191578029,
 			"lng": 151.20217386753
 		},
-		"metro": {
-			"name": "The Daily Telegraph",
-			"code": "DT"
-		},
+		"metros": [
+			{
+				"id": "The Daily Telegraph",
+				"code": "DT"
+			},
+			{
+				"id": "The Sunday Telegraph",
+				"code": "ST"
+			}
+		],
 		"publicationsMapping": [
 			{
 				"id": "Blacktown Advocate",
@@ -254,10 +260,16 @@ module.exports = {
 			"lat": -27.470125,
 			"lng": 153.021072
 		},
-		"metro": {
-			"name": "The Courier Mail",
-			"code": "CM"
-		}
+		"metros": [
+			{
+				"id": "The Courier Mail",
+				"code": "CM"
+			},
+			{
+				"id": "The Sunday Mail",
+				"code": "SMB"
+			}
+		]
 	}
 };
 
@@ -17847,7 +17859,7 @@ exports = module.exports = __webpack_require__(6)();
 
 
 // module
-exports.push([module.i, "/* http://meyerweb.com/eric/tools/css/reset/\r\n   v2.0 | 20110126\r\n   License: none (public domain)\r\n*/\nhtml, body, div, span, applet, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, img, ins, kbd, q, s, samp,\nsmall, strike, strong, sub, sup, tt, var,\nb, u, i, center,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, embed,\nfigure, figcaption, footer, header, hgroup,\nmenu, nav, output, ruby, section, summary,\ntime, mark, audio, video {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-size: 100%;\n  font: inherit;\n  vertical-align: baseline; }\n\n/* HTML5 display-role reset for older browsers */\narticle, aside, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section {\n  display: block; }\n\nbody {\n  line-height: 1; }\n\nol, ul {\n  list-style: none; }\n\nblockquote, q {\n  quotes: none; }\n\nblockquote:before, blockquote:after,\nq:before, q:after {\n  content: '';\n  content: none; }\n\ntable {\n  border-collapse: collapse;\n  border-spacing: 0; }\n\n/* CUSTOM CSS START*/\nbody {\n  font-family: 'Noto Sans', 'PT Sans', 'Open Sans', 'Helvetica Neue', Arial, Helvetica, sans-serif;\n  margin: 0px;\n  padding: 0px;\n  background: url(\"/images/mosaic.png\") repeat; }\n\n.page-container {\n  margin: 0px auto;\n  width: 100%; }\n\n.error {\n  display: block;\n  width: 80%;\n  position: fixed;\n  text-align: center;\n  top: 10px;\n  color: red;\n  font-size: 19px;\n  z-index: 999;\n  background: #FFF;\n  padding: 5px; }\n\nheader .container {\n  width: 80%;\n  margin: 0px auto; }\n\nheader .logo-container {\n  background: #3f4652;\n  padding: 10px; }\n\nheader .menu-container {\n  background: #d8d8d8;\n  font-size: 18px;\n  padding: 8px 0px; }\n  header .menu-container .insights {\n    width: 45%;\n    display: inline-block; }\n    header .menu-container .insights strong {\n      text-decoration: underline; }\n  header .menu-container .state-insight {\n    text-align: right; }\n  header .menu-container .state-btn {\n    display: inline-block;\n    padding: 5px 13px;\n    border-radius: 30px;\n    background: #FFF;\n    margin: 0px 0px 0px 5px;\n    color: #000;\n    text-decoration: none;\n    border: 1px solid #18d4ca; }\n\n.map-container {\n  overflow: auto;\n  vertical-align: top;\n  width: 100%;\n  display: inline-block;\n  position: fixed;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  top: 110px; }\n\n.map,\n.metro {\n  width: 70%;\n  height: 100%; }\n  .map.hide,\n  .metro.hide {\n    display: none; }\n\n.map .tooltip {\n  text-align: center; }\n  .map .tooltip ul.facts {\n    margin: 0px;\n    padding: 0px;\n    width: 100%;\n    text-align: center;\n    vertical-align: top; }\n    .map .tooltip ul.facts li {\n      display: inline-block;\n      margin: 0px;\n      padding: 10px;\n      text-align: center; }\n      .map .tooltip ul.facts li h4 {\n        font-size: 15px;\n        display: block;\n        margin: 5px 0px; }\n      .map .tooltip ul.facts li label {\n        font-weight: 500; }\n      .map .tooltip ul.facts li:nth-child(odd) {\n        border-right: 1px solid #CCC; }\n\n.publications {\n  width: 30%;\n  height: 97%;\n  position: relative;\n  overflow: auto;\n  float: right;\n  margin: 0px;\n  color: #6f6f6f;\n  font-size: 100%;\n  margin: 10px 10px 0px 10px;\n  background: #FFF; }\n  .publications .publications-data {\n    padding: 20px; }\n  .publications .form-control {\n    font-size: 100%;\n    margin: 0px;\n    padding-bottom: 30px;\n    border-bottom: 1px solid #dddddd; }\n    .publications .form-control label {\n      display: inline-block;\n      text-align: right; }\n    .publications .form-control input#pac-input {\n      width: 95%;\n      display: inline-block;\n      padding: 10px;\n      font-size: 18px; }\n  .publications .form-output {\n    padding: 3px 0px;\n    font-size: 18px;\n    border-bottom: 1px solid #dddddd;\n    background: #424345;\n    border-radius: 5px;\n    color: #FFF;\n    text-align: center;\n    overflow: auto; }\n    .publications .form-output .toggle-btn {\n      display: block;\n      text-align: right;\n      text-decoration: underline;\n      font-size: 11px;\n      margin: 0px 5px 0px 5px;\n      color: white; }\n    .publications .form-output .content {\n      margin: 10px; }\n    .publications .form-output .search-place {\n      padding-bottom: 10px;\n      border-bottom: 1px solid #CCC;\n      margin-top: 16px; }\n    .publications .form-output h3 {\n      font-size: 20px;\n      line-height: 1.4em; }\n    .publications .form-output .customer-reach {\n      font-size: 15px;\n      font-weight: normal;\n      color: #CCC; }\n      .publications .form-output .customer-reach span {\n        font-weight: bold; }\n    .publications .form-output ul.facts {\n      border-top: 1px solid #CCC;\n      border-bottom: 1px solid #CCC;\n      margin: 0px;\n      padding: 0px;\n      width: 100%;\n      text-align: center;\n      vertical-align: top; }\n      .publications .form-output ul.facts li {\n        display: inline-block;\n        min-width: 49%;\n        margin: 0px;\n        padding: 0px;\n        text-align: center; }\n        .publications .form-output ul.facts li h4 {\n          font-size: 16px;\n          display: block;\n          margin: 5px 0px; }\n        .publications .form-output ul.facts li label {\n          font-weight: 500; }\n        .publications .form-output ul.facts li:nth-child(odd) {\n          border-right: 1px solid #CCC; }\n  .publications .publication-header {\n    display: block;\n    margin: 10px 0px 0px 0px;\n    padding: 5px 0px 0px 11px;\n    font-size: 19px;\n    color: #000; }\n    .publications .publication-header .toggle-btn {\n      display: inline-block;\n      float: right;\n      text-decoration: underline;\n      font-size: 11px;\n      color: blue; }\n  .publications.ng-scope:after {\n    content: \"\";\n    display: block;\n    position: fixed;\n    bottom: 0;\n    left: 0;\n    width: 100%;\n    height: 5%;\n    background: linear-gradient(transparent, #ddd) left repeat; }\n  .publications .pub-list {\n    display: block;\n    vertical-align: top;\n    margin: 10px 0px;\n    padding: 0px;\n    overflow: auto;\n    position: relative;\n    /* &.open {\r\n      top: 0px;\r\n      transition-property: top;\r\n      transition-duration: 1s;\r\n      transition-timing-function: linear;\r\n    }\r\n\r\n    &.hide {\r\n      top: -50em;\r\n      transition-property: top;\r\n      transition-duration: 1s;\r\n      transition-timing-function: linear;\r\n    }*/ }\n    .publications .pub-list li {\n      margin: 0px;\n      padding: 0px;\n      list-style: none; }\n      .publications .pub-list li a {\n        display: block;\n        margin: 0px;\n        padding: 5px 0px 5px 10px;\n        border-bottom: 1px solid #CCC;\n        text-decoration: none;\n        color: #6f6f6f; }\n      .publications .pub-list li.active a {\n        background: #CC0000;\n        color: #FFF; }\n\n.disclaimer {\n  position: relative;\n  z-index: 100;\n  background: white;\n  width: auto;\n  float: left;\n  padding: 10px;\n  font-size: 12px;\n  margin: 7px;\n  opacity: 0.7; }\n", ""]);
+exports.push([module.i, "/* http://meyerweb.com/eric/tools/css/reset/\r\n   v2.0 | 20110126\r\n   License: none (public domain)\r\n*/\nhtml, body, div, span, applet, object, iframe,\nh1, h2, h3, h4, h5, h6, p, blockquote, pre,\na, abbr, acronym, address, big, cite, code,\ndel, dfn, em, img, ins, kbd, q, s, samp,\nsmall, strike, strong, sub, sup, tt, var,\nb, u, i, center,\ndl, dt, dd, ol, ul, li,\nfieldset, form, label, legend,\ntable, caption, tbody, tfoot, thead, tr, th, td,\narticle, aside, canvas, details, embed,\nfigure, figcaption, footer, header, hgroup,\nmenu, nav, output, ruby, section, summary,\ntime, mark, audio, video {\n  margin: 0;\n  padding: 0;\n  border: 0;\n  font-size: 100%;\n  font: inherit;\n  vertical-align: baseline; }\n\n/* HTML5 display-role reset for older browsers */\narticle, aside, details, figcaption, figure,\nfooter, header, hgroup, menu, nav, section {\n  display: block; }\n\nbody {\n  line-height: 1; }\n\nol, ul {\n  list-style: none; }\n\nblockquote, q {\n  quotes: none; }\n\nblockquote:before, blockquote:after,\nq:before, q:after {\n  content: '';\n  content: none; }\n\ntable {\n  border-collapse: collapse;\n  border-spacing: 0; }\n\n/* CUSTOM CSS START*/\nbody {\n  font-family: 'Noto Sans', 'PT Sans', 'Open Sans', 'Helvetica Neue', Arial, Helvetica, sans-serif;\n  margin: 0px;\n  padding: 0px;\n  background: url(\"/images/mosaic.png\") repeat; }\n\n.page-container {\n  margin: 0px auto;\n  width: 100%; }\n\n.error {\n  display: block;\n  width: 80%;\n  position: fixed;\n  text-align: center;\n  top: 10px;\n  color: red;\n  font-size: 19px;\n  z-index: 999;\n  background: #FFF;\n  padding: 5px; }\n\nheader .container {\n  width: 80%;\n  margin: 0px auto; }\n\nheader .logo-container {\n  background: #3f4652;\n  padding: 10px; }\n\nheader .menu-container {\n  background: #d8d8d8;\n  font-size: 14px;\n  padding: 8px 0px; }\n  header .menu-container .insights {\n    width: 45%;\n    display: inline-block; }\n    header .menu-container .insights strong {\n      text-decoration: underline; }\n  header .menu-container .state-insight {\n    text-align: right; }\n  header .menu-container .state-btn {\n    display: inline-block;\n    padding: 5px 13px;\n    border-radius: 30px;\n    background: #FFF;\n    margin: 0px 0px 0px 5px;\n    color: #000;\n    text-decoration: none;\n    border: 1px solid #18d4ca; }\n\n.map-container {\n  overflow: auto;\n  vertical-align: top;\n  width: 100%;\n  display: inline-block;\n  position: fixed;\n  bottom: 0;\n  left: 0;\n  right: 0;\n  top: 110px; }\n\n.map,\n.metro {\n  width: 70%;\n  height: 100%; }\n  .map.hide,\n  .metro.hide {\n    display: none; }\n\n.map .tooltip {\n  text-align: center; }\n  .map .tooltip ul.facts {\n    margin: 0px;\n    padding: 0px;\n    width: 100%;\n    text-align: center;\n    vertical-align: top; }\n    .map .tooltip ul.facts li {\n      display: inline-block;\n      margin: 0px;\n      padding: 10px;\n      text-align: center; }\n      .map .tooltip ul.facts li h4 {\n        font-size: 15px;\n        display: block;\n        margin: 5px 0px; }\n      .map .tooltip ul.facts li label {\n        font-weight: 500; }\n      .map .tooltip ul.facts li:nth-child(odd) {\n        border-right: 1px solid #CCC; }\n\n.publications {\n  width: 30%;\n  height: 97%;\n  position: relative;\n  overflow: auto;\n  float: right;\n  margin: 0px;\n  color: #6f6f6f;\n  font-size: 100%;\n  margin: 10px 10px 0px 10px;\n  background: #FFF; }\n  .publications .publications-data {\n    padding: 20px; }\n  .publications .form-control {\n    font-size: 100%;\n    margin: 0px;\n    padding-bottom: 30px;\n    border-bottom: 1px solid #dddddd; }\n    .publications .form-control label {\n      display: inline-block;\n      text-align: right; }\n    .publications .form-control input#pac-input {\n      width: 95%;\n      display: inline-block;\n      padding: 10px;\n      font-size: 18px; }\n  .publications .form-output {\n    padding: 3px 0px;\n    font-size: 18px;\n    border-bottom: 1px solid #dddddd;\n    background: #424345;\n    border-radius: 5px;\n    color: #FFF;\n    text-align: center;\n    overflow: auto; }\n    .publications .form-output .toggle-btn {\n      display: block;\n      text-align: right;\n      text-decoration: underline;\n      font-size: 11px;\n      margin: 0px 5px 0px 5px;\n      color: white; }\n    .publications .form-output .content {\n      margin: 10px; }\n    .publications .form-output .search-place {\n      padding-bottom: 10px;\n      border-bottom: 1px solid #CCC;\n      margin-top: 16px; }\n    .publications .form-output h3 {\n      font-size: 20px;\n      line-height: 1.4em; }\n    .publications .form-output .customer-reach {\n      font-size: 15px;\n      font-weight: normal;\n      color: #CCC; }\n      .publications .form-output .customer-reach span {\n        font-weight: bold; }\n    .publications .form-output ul.facts {\n      border-top: 1px solid #CCC;\n      border-bottom: 1px solid #CCC;\n      margin: 0px;\n      padding: 0px;\n      width: 100%;\n      text-align: center;\n      vertical-align: top; }\n      .publications .form-output ul.facts li {\n        display: inline-block;\n        min-width: 49%;\n        margin: 0px;\n        padding: 0px;\n        text-align: center; }\n        .publications .form-output ul.facts li h4 {\n          font-size: 16px;\n          display: block;\n          margin: 5px 0px; }\n        .publications .form-output ul.facts li label {\n          font-weight: 500; }\n        .publications .form-output ul.facts li:nth-child(odd) {\n          border-right: 1px solid #CCC; }\n  .publications .publication-header {\n    display: block;\n    margin: 10px 0px 0px 0px;\n    padding: 5px 0px 0px 11px;\n    font-size: 19px;\n    color: #000; }\n    .publications .publication-header .toggle-btn {\n      display: inline-block;\n      float: right;\n      text-decoration: underline;\n      font-size: 11px;\n      color: blue; }\n  .publications.ng-scope:after {\n    content: \"\";\n    display: block;\n    position: fixed;\n    bottom: 0;\n    left: 0;\n    width: 100%;\n    height: 5%;\n    background: linear-gradient(transparent, #ddd) left repeat; }\n  .publications .pub-list {\n    display: block;\n    vertical-align: top;\n    margin: 10px 0px;\n    padding: 0px;\n    overflow: auto;\n    position: relative;\n    /* &.open {\r\n      top: 0px;\r\n      transition-property: top;\r\n      transition-duration: 1s;\r\n      transition-timing-function: linear;\r\n    }\r\n\r\n    &.hide {\r\n      top: -50em;\r\n      transition-property: top;\r\n      transition-duration: 1s;\r\n      transition-timing-function: linear;\r\n    }*/ }\n    .publications .pub-list li {\n      margin: 0px;\n      padding: 0px;\n      list-style: none; }\n      .publications .pub-list li a {\n        display: block;\n        margin: 0px;\n        padding: 5px 0px 5px 10px;\n        border-bottom: 1px solid #CCC;\n        text-decoration: none;\n        color: #6f6f6f; }\n      .publications .pub-list li.active a {\n        background: #CC0000;\n        color: #FFF; }\n\n.disclaimer {\n  position: relative;\n  z-index: 100;\n  background: white;\n  width: auto;\n  float: left;\n  padding: 10px;\n  font-size: 12px;\n  margin: 7px;\n  opacity: 0.7; }\n", ""]);
 
 // exports
 
@@ -18152,7 +18164,7 @@ mapApp.controller('MapController', ['$rootScope', '$scope', '$timeout', '$locati
 
         showMetro: function (config) {
             console.log('showMetro clicked');
-            var urlPath = config.state + '/' + config.metro.code;
+            var urlPath = config.state + '/metro';
             $location.path(urlPath);
         },
 
@@ -18318,15 +18330,6 @@ mapApp.directive('mapArea', ['mapService', '$compile', function (mapService, $co
 
             $scope.facts = {};
 
-            $scope.$watch('activeMapConfig.activeArea', function (activeArea) {
-                console.log('mapArea::$watch--------------------------activeArea is ', activeArea);
-                /*if (activeArea === 'LOCAL') {
-                    $element.removeClass('hide').addClass('open');
-                } else {
-                    $element.removeClass('open').addClass('hide');
-                }*/
-            });
-
             mapService.onLoadMap(function (config) {
                 console.log('mapArea: on Load map');
 
@@ -18448,6 +18451,7 @@ mapApp.directive('mapArea', ['mapService', '$compile', function (mapService, $co
                     var selectedFeatures = [],
                         featureIds = [];
                     var bounds = new google.maps.LatLngBounds();
+
                     var i = {
                         url: place.icon,
                         size: new google.maps.Size(71, 71),
@@ -18524,6 +18528,7 @@ mapApp.directive('publicationsList', ['mapService', '$timeout', '$location', fun
 
             mapService.onLoadMap(function (config) {
                 console.log('publicationsList: on Load map');
+
                 if (!this.isInit) {
                     search = new google.maps.places.Autocomplete($element[0].querySelector('.pac-input'), searchOpts);
                     google.maps.event.addListener(search, 'place_changed', controller.searchMap.bind(this, search));
@@ -18572,6 +18577,7 @@ mapApp.directive('publicationsList', ['mapService', '$timeout', '$location', fun
                         console.warn('[FAIL] No place found..');
                         return;
                     }
+
                     $scope.searchedPlace = place;
 
                     state = place.address_components.filter(function (address) {
@@ -18592,6 +18598,7 @@ mapApp.directive('publicationsList', ['mapService', '$timeout', '$location', fun
                 },
 
                 addPublications: function (data) {
+
                     $scope.publications = data.features.map(function (feature) {
                         return {
                             id: feature.id,
@@ -18600,6 +18607,7 @@ mapApp.directive('publicationsList', ['mapService', '$timeout', '$location', fun
                             facts: []
                         };
                     });
+
                     if ($scope.isNewStateSearch) {
                         //TODO:refactor
                         $timeout(function () {

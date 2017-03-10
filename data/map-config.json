@@ -4,7 +4,10 @@
 	"geoJson": "data/nsw.json",
 	"insights": "Sydney Local Community Newspaper",
 	"center": { "lat": -33.8899191578029, "lng": 151.20217386753  },
-	"metro": {"name": "The Daily Telegraph", "code": "DT" },
+	"metros": [
+	  {"id": "The Daily Telegraph", "code": "DT" },
+	  {"id": "The Sunday Telegraph", "code": "ST" }
+	],
 	"publicationsMapping": [
 	  {
 		"id": "Blacktown Advocate",
@@ -93,6 +96,9 @@
 	"geoJson": "data/qld.json",
 	"insights": "Brisbane Local Community Newspaper",
 	"center": { "lat": -27.470125, "lng": 153.021072 },
-	"metro": {"name": "The Courier Mail", "code": "CM" }
+	"metros": [
+	  {"id": "The Courier Mail", "code": "CM" },
+	  {"id": "The Sunday Mail", "code": "SMB" }
+	]
   }
 }

@@ -43,7 +43,7 @@ mapApp.controller('MapController', ['$rootScope', '$scope', '$timeout', '$locati
 
         showMetro: function (config) {
             console.log('showMetro clicked');
-            var urlPath = config.state + '/' + config.metro.code;
+            var urlPath = config.state + '/metro';
             $location.path(urlPath);
         },
 
@@ -214,15 +214,6 @@ mapApp.directive('mapArea', ['mapService', '$compile',  function (mapService, $c
 
             $scope.facts = {};
 
-            $scope.$watch('activeMapConfig.activeArea', function (activeArea) {
-               console.log('mapArea::$watch--------------------------activeArea is ', activeArea);
-                /*if (activeArea === 'LOCAL') {
-                    $element.removeClass('hide').addClass('open');
-                } else {
-                    $element.removeClass('open').addClass('hide');
-                }*/
-            });
-
             mapService.onLoadMap(function (config) {
                 console.log('mapArea: on Load map');
 
@@ -346,6 +337,7 @@ mapApp.directive('mapArea', ['mapService', '$compile',  function (mapService, $c
                     var selectedFeatures = [],
                         featureIds = [];
                     var bounds = new google.maps.LatLngBounds();
+
                     var i = {
                         url: place.icon,
                         size: new google.maps.Size(71, 71),
@@ -423,6 +415,7 @@ mapApp.directive('publicationsList', ['mapService', '$timeout', '$location', fun
 
             mapService.onLoadMap(function (config) {
                 console.log('publicationsList: on Load map');
+
                 if (!this.isInit) {
                     search = new google.maps.places.Autocomplete($element[0].querySelector('.pac-input'), searchOpts);
                     google.maps.event.addListener(search, 'place_changed', controller.searchMap.bind(this, search));
@@ -471,6 +464,7 @@ mapApp.directive('publicationsList', ['mapService', '$timeout', '$location', fun
                         console.warn('[FAIL] No place found..');
                         return;
                     }
+
                     $scope.searchedPlace = place;
 
                     state = place.address_components.filter(function(address){
@@ -491,6 +485,7 @@ mapApp.directive('publicationsList', ['mapService', '$timeout', '$location', fun
                 },
 
                 addPublications: function (data) {
+
                     $scope.publications = data.features.map(function(feature) {
                         return {
                             id: feature.id,
@@ -499,6 +494,7 @@ mapApp.directive('publicationsList', ['mapService', '$timeout', '$location', fun
                             facts: []
                         }
                     });
+
                     if ($scope.isNewStateSearch) {
                         //TODO:refactor
                         $timeout(function () {
