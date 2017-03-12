@@ -18307,7 +18307,7 @@ mapApp.component('mapComponent', {
 
 });
 
-mapApp.directive('mapArea', ['mapService', '$compile', function (mapService, $compile) {
+mapApp.directive('googleMap', ['mapService', '$compile', function (mapService, $compile) {
 
     var map;
 
@@ -18320,7 +18320,7 @@ mapApp.directive('mapArea', ['mapService', '$compile', function (mapService, $co
         transclude: true,
 
         templateUrl: function ($element, $attrs) {
-            return $attrs.templateUrl || 'templates/map-area.html';
+            return $attrs.templateUrl || 'templates/google-map.html';
         },
 
         link: function ($scope, $element, attr, controller) {
