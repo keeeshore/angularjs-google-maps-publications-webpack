@@ -11,6 +11,15 @@ var toolTipHtml = require('../templates/map-tooltip.html');
 mapsConfig.NSW.styles = styles;
 mapsConfig.QLD.styles = styles;
 
+window.getSelectedPublications = function (elem) {
+    var ngElem, pubs = [];
+    ngElem = elem || document.getElementsByClassName('publications')[0];
+    pubs = angular.element(ngElem).scope().publications.filter(function (obj) {
+        return obj.isSelected;
+    });
+    return pubs;
+};
+
 var mapApp = angular.module('mapApp', []);
 
 mapApp.controller('MapController', ['$rootScope', '$scope', '$timeout', '$location', function ($rootScope, $scope, $timeout, $location) {
